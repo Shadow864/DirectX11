@@ -449,9 +449,7 @@ void Application::CreateObject(UINT id)
 
 		ModelObject* Wall1 = new Billboard();// Cylinder(1, 1, 2, 6, 6);
 		Wall1->SetMaterial(ContentManager::GetInstance().m_MaterialManager->Billboard);
-		Wall1->SetPosition(0, 1, 3);
-		Wall1->SetRotation(-90, 0, 0);
-		Wall1->SetScale(2, 2, 2);
+		Wall1->SetPosition(0, 0, 2);
 		m_ModelObjects.push_back(Wall1);
 		
 		
