@@ -77,7 +77,7 @@ VertexOut VS(VertexIn vin)
 {
 	VertexOut vout;
 	
-	vout.CenterW = vin.PosW;
+	vout.CenterW = mul(float4(vin.PosW, 1.0f), gWorld).xyz;// mul(vin.PosW, gWorld);
 	vout.SizeW = vin.SizeW;
 
     return vout;
