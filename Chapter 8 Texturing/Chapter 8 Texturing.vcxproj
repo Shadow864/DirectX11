@@ -1,0 +1,434 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CA626B28-6A68-4796-A464-4AEAB8C78A3F}</ProjectGuid>
+    <RootNamespace>Chapter7Lighting</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <LibraryPath>$(OutDir);$(LibraryPath)</LibraryPath>
+    <IncludePath>../DirectXApp/;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <LibraryPath>$(OutDir);$(LibraryPath)</LibraryPath>
+    <IncludePath>../DirectXApp/;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>../DirectXApp/;$(IncludePath)</IncludePath>
+    <LibraryPath>$(OutDir);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Effects11\inc;$(SolutionDir)\Effects11\Binary;$(SolutionDir)\DirectXTK\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d11.lib;D3DCompiler.lib;directxapp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Effects11\inc;$(SolutionDir)\Effects11\Binary;$(SolutionDir)\DirectXTK\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d11.lib;D3DCompiler.lib;directxapp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Effects11\inc;$(SolutionDir)\Effects11\Binary;$(SolutionDir)\DirectXTK\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Effects11\inc;$(SolutionDir)\Effects11\Binary;$(SolutionDir)\DirectXTK\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>d3d11.lib;D3DCompiler.lib;directxapp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DirectXApp\DirectXApp.vcxproj">
+      <Project>{d86bfc50-aeff-4a71-80fc-5a64420dff80}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\DirectXTK\DirectXTK_Desktop_2013.vcxproj">
+      <Project>{e0b52ae7-e160-4d32-bf3f-910b785e5a8e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Effects11\Effects11_2012.vcxproj">
+      <Project>{df460eab-570d-4b50-9089-2e2fc801bf38}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="Chapter 8 Texturing.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Chapter 8 Texturing.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="FX\Basic.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">FX/%(Filename).fxo</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">FX/%(Filename).fxo</ObjectFileOutput>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">FX/%(Filename).fxo</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="FX\Billboard.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">FX/%(Filename).fxo</ObjectFileOutput>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">FX/%(Filename).fxo</ObjectFileOutput>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">FX/%(Filename).fxo</ObjectFileOutput>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">FX/%(Filename).fxo</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="FX\color.fx">
+      <DeploymentContent>true</DeploymentContent>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ColorTech</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ColorTech</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).fxo</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">FX/%(Filename).fxo</ObjectFileOutput>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ColorTech</AdditionalIncludeDirectories>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="FX\LightHelper.fx">
+      <DeploymentContent>true</DeploymentContent>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).fxo</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">FX/%(Filename).fxo</ObjectFileOutput>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Models\car.txt">
+      <DeploymentContent>true</DeploymentContent>
+    </Text>
+    <Text Include="Models\skull.txt">
+      <DeploymentContent>true</DeploymentContent>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Textures\BoltAnim\Bolt001.dds" />
+    <Image Include="Textures\BoltAnim\Bolt002.dds" />
+    <Image Include="Textures\BoltAnim\Bolt003.dds" />
+    <Image Include="Textures\BoltAnim\Bolt004.dds" />
+    <Image Include="Textures\BoltAnim\Bolt005.dds" />
+    <Image Include="Textures\BoltAnim\Bolt006.dds" />
+    <Image Include="Textures\BoltAnim\Bolt007.dds" />
+    <Image Include="Textures\BoltAnim\Bolt008.dds" />
+    <Image Include="Textures\BoltAnim\Bolt009.dds" />
+    <Image Include="Textures\BoltAnim\Bolt010.dds" />
+    <Image Include="Textures\BoltAnim\Bolt011.dds" />
+    <Image Include="Textures\BoltAnim\Bolt012.dds" />
+    <Image Include="Textures\BoltAnim\Bolt013.dds" />
+    <Image Include="Textures\BoltAnim\Bolt014.dds" />
+    <Image Include="Textures\BoltAnim\Bolt015.dds" />
+    <Image Include="Textures\BoltAnim\Bolt016.dds" />
+    <Image Include="Textures\BoltAnim\Bolt017.dds" />
+    <Image Include="Textures\BoltAnim\Bolt018.dds" />
+    <Image Include="Textures\BoltAnim\Bolt019.dds" />
+    <Image Include="Textures\BoltAnim\Bolt020.dds" />
+    <Image Include="Textures\BoltAnim\Bolt021.dds" />
+    <Image Include="Textures\BoltAnim\Bolt022.dds" />
+    <Image Include="Textures\BoltAnim\Bolt023.dds" />
+    <Image Include="Textures\BoltAnim\Bolt024.dds" />
+    <Image Include="Textures\BoltAnim\Bolt025.dds" />
+    <Image Include="Textures\BoltAnim\Bolt026.dds" />
+    <Image Include="Textures\BoltAnim\Bolt027.dds" />
+    <Image Include="Textures\BoltAnim\Bolt028.dds" />
+    <Image Include="Textures\BoltAnim\Bolt029.dds" />
+    <Image Include="Textures\BoltAnim\Bolt030.dds" />
+    <Image Include="Textures\BoltAnim\Bolt031.dds" />
+    <Image Include="Textures\BoltAnim\Bolt032.dds" />
+    <Image Include="Textures\BoltAnim\Bolt033.dds" />
+    <Image Include="Textures\BoltAnim\Bolt034.dds" />
+    <Image Include="Textures\BoltAnim\Bolt035.dds" />
+    <Image Include="Textures\BoltAnim\Bolt036.dds" />
+    <Image Include="Textures\BoltAnim\Bolt037.dds" />
+    <Image Include="Textures\BoltAnim\Bolt038.dds" />
+    <Image Include="Textures\BoltAnim\Bolt039.dds" />
+    <Image Include="Textures\BoltAnim\Bolt040.dds" />
+    <Image Include="Textures\BoltAnim\Bolt041.dds" />
+    <Image Include="Textures\BoltAnim\Bolt042.dds" />
+    <Image Include="Textures\BoltAnim\Bolt043.dds" />
+    <Image Include="Textures\BoltAnim\Bolt044.dds" />
+    <Image Include="Textures\BoltAnim\Bolt045.dds" />
+    <Image Include="Textures\BoltAnim\Bolt046.dds" />
+    <Image Include="Textures\BoltAnim\Bolt047.dds" />
+    <Image Include="Textures\BoltAnim\Bolt048.dds" />
+    <Image Include="Textures\BoltAnim\Bolt049.dds" />
+    <Image Include="Textures\BoltAnim\Bolt050.dds" />
+    <Image Include="Textures\BoltAnim\Bolt051.dds" />
+    <Image Include="Textures\BoltAnim\Bolt052.dds" />
+    <Image Include="Textures\BoltAnim\Bolt053.dds" />
+    <Image Include="Textures\BoltAnim\Bolt054.dds" />
+    <Image Include="Textures\BoltAnim\Bolt055.dds" />
+    <Image Include="Textures\BoltAnim\Bolt056.dds" />
+    <Image Include="Textures\BoltAnim\Bolt057.dds" />
+    <Image Include="Textures\BoltAnim\Bolt058.dds" />
+    <Image Include="Textures\BoltAnim\Bolt059.dds" />
+    <Image Include="Textures\BoltAnim\Bolt060.dds" />
+    <Image Include="Textures\brick01.dds" />
+    <Image Include="Textures\checkboard.dds" />
+    <Image Include="Textures\darkbrick.bmp" />
+    <Image Include="Textures\darkbrickdxt1.dds" />
+    <Image Include="Textures\FireAnim\Fire001.dds" />
+    <Image Include="Textures\FireAnim\Fire002.dds" />
+    <Image Include="Textures\FireAnim\Fire003.dds" />
+    <Image Include="Textures\FireAnim\Fire004.dds" />
+    <Image Include="Textures\FireAnim\Fire005.dds" />
+    <Image Include="Textures\FireAnim\Fire006.dds" />
+    <Image Include="Textures\FireAnim\Fire007.dds" />
+    <Image Include="Textures\FireAnim\Fire008.dds" />
+    <Image Include="Textures\FireAnim\Fire009.dds" />
+    <Image Include="Textures\FireAnim\Fire010.dds" />
+    <Image Include="Textures\FireAnim\Fire011.dds" />
+    <Image Include="Textures\FireAnim\Fire012.dds" />
+    <Image Include="Textures\FireAnim\Fire013.dds" />
+    <Image Include="Textures\FireAnim\Fire014.dds" />
+    <Image Include="Textures\FireAnim\Fire015.dds" />
+    <Image Include="Textures\FireAnim\Fire016.dds" />
+    <Image Include="Textures\FireAnim\Fire017.dds" />
+    <Image Include="Textures\FireAnim\Fire018.dds" />
+    <Image Include="Textures\FireAnim\Fire019.dds" />
+    <Image Include="Textures\FireAnim\Fire020.dds" />
+    <Image Include="Textures\FireAnim\Fire021.dds" />
+    <Image Include="Textures\FireAnim\Fire022.dds" />
+    <Image Include="Textures\FireAnim\Fire023.dds" />
+    <Image Include="Textures\FireAnim\Fire024.dds" />
+    <Image Include="Textures\FireAnim\Fire025.dds" />
+    <Image Include="Textures\FireAnim\Fire026.dds" />
+    <Image Include="Textures\FireAnim\Fire027.dds" />
+    <Image Include="Textures\FireAnim\Fire028.dds" />
+    <Image Include="Textures\FireAnim\Fire029.dds" />
+    <Image Include="Textures\FireAnim\Fire030.dds" />
+    <Image Include="Textures\FireAnim\Fire031.dds" />
+    <Image Include="Textures\FireAnim\Fire032.dds" />
+    <Image Include="Textures\FireAnim\Fire033.dds" />
+    <Image Include="Textures\FireAnim\Fire034.dds" />
+    <Image Include="Textures\FireAnim\Fire035.dds" />
+    <Image Include="Textures\FireAnim\Fire036.dds" />
+    <Image Include="Textures\FireAnim\Fire037.dds" />
+    <Image Include="Textures\FireAnim\Fire038.dds" />
+    <Image Include="Textures\FireAnim\Fire039.dds" />
+    <Image Include="Textures\FireAnim\Fire040.dds" />
+    <Image Include="Textures\FireAnim\Fire041.dds" />
+    <Image Include="Textures\FireAnim\Fire042.dds" />
+    <Image Include="Textures\FireAnim\Fire043.dds" />
+    <Image Include="Textures\FireAnim\Fire044.dds" />
+    <Image Include="Textures\FireAnim\Fire045.dds" />
+    <Image Include="Textures\FireAnim\Fire046.dds" />
+    <Image Include="Textures\FireAnim\Fire047.dds" />
+    <Image Include="Textures\FireAnim\Fire048.dds" />
+    <Image Include="Textures\FireAnim\Fire049.dds" />
+    <Image Include="Textures\FireAnim\Fire050.dds" />
+    <Image Include="Textures\FireAnim\Fire051.dds" />
+    <Image Include="Textures\FireAnim\Fire052.dds" />
+    <Image Include="Textures\FireAnim\Fire053.dds" />
+    <Image Include="Textures\FireAnim\Fire054.dds" />
+    <Image Include="Textures\FireAnim\Fire055.dds" />
+    <Image Include="Textures\FireAnim\Fire056.dds" />
+    <Image Include="Textures\FireAnim\Fire057.dds" />
+    <Image Include="Textures\FireAnim\Fire058.dds" />
+    <Image Include="Textures\FireAnim\Fire059.dds" />
+    <Image Include="Textures\FireAnim\Fire060.dds" />
+    <Image Include="Textures\FireAnim\Fire061.dds" />
+    <Image Include="Textures\FireAnim\Fire062.dds" />
+    <Image Include="Textures\FireAnim\Fire063.dds" />
+    <Image Include="Textures\FireAnim\Fire064.dds" />
+    <Image Include="Textures\FireAnim\Fire065.dds" />
+    <Image Include="Textures\FireAnim\Fire066.dds" />
+    <Image Include="Textures\FireAnim\Fire067.dds" />
+    <Image Include="Textures\FireAnim\Fire068.dds" />
+    <Image Include="Textures\FireAnim\Fire069.dds" />
+    <Image Include="Textures\FireAnim\Fire070.dds" />
+    <Image Include="Textures\FireAnim\Fire071.dds" />
+    <Image Include="Textures\FireAnim\Fire072.dds" />
+    <Image Include="Textures\FireAnim\Fire073.dds" />
+    <Image Include="Textures\FireAnim\Fire074.dds" />
+    <Image Include="Textures\FireAnim\Fire075.dds" />
+    <Image Include="Textures\FireAnim\Fire076.dds" />
+    <Image Include="Textures\FireAnim\Fire077.dds" />
+    <Image Include="Textures\FireAnim\Fire078.dds" />
+    <Image Include="Textures\FireAnim\Fire079.dds" />
+    <Image Include="Textures\FireAnim\Fire080.dds" />
+    <Image Include="Textures\FireAnim\Fire081.dds" />
+    <Image Include="Textures\FireAnim\Fire082.dds" />
+    <Image Include="Textures\FireAnim\Fire083.dds" />
+    <Image Include="Textures\FireAnim\Fire084.dds" />
+    <Image Include="Textures\FireAnim\Fire085.dds" />
+    <Image Include="Textures\FireAnim\Fire086.dds" />
+    <Image Include="Textures\FireAnim\Fire087.dds" />
+    <Image Include="Textures\FireAnim\Fire088.dds" />
+    <Image Include="Textures\FireAnim\Fire089.dds" />
+    <Image Include="Textures\FireAnim\Fire090.dds" />
+    <Image Include="Textures\FireAnim\Fire091.dds" />
+    <Image Include="Textures\FireAnim\Fire092.dds" />
+    <Image Include="Textures\FireAnim\Fire093.dds" />
+    <Image Include="Textures\FireAnim\Fire094.dds" />
+    <Image Include="Textures\FireAnim\Fire095.dds" />
+    <Image Include="Textures\FireAnim\Fire096.dds" />
+    <Image Include="Textures\FireAnim\Fire097.dds" />
+    <Image Include="Textures\FireAnim\Fire098.dds" />
+    <Image Include="Textures\FireAnim\Fire099.dds" />
+    <Image Include="Textures\FireAnim\Fire100.dds" />
+    <Image Include="Textures\FireAnim\Fire101.dds" />
+    <Image Include="Textures\FireAnim\Fire102.dds" />
+    <Image Include="Textures\FireAnim\Fire103.dds" />
+    <Image Include="Textures\FireAnim\Fire104.dds" />
+    <Image Include="Textures\FireAnim\Fire105.dds" />
+    <Image Include="Textures\FireAnim\Fire106.dds" />
+    <Image Include="Textures\FireAnim\Fire107.dds" />
+    <Image Include="Textures\FireAnim\Fire108.dds" />
+    <Image Include="Textures\FireAnim\Fire109.dds" />
+    <Image Include="Textures\FireAnim\Fire110.dds" />
+    <Image Include="Textures\FireAnim\Fire111.dds" />
+    <Image Include="Textures\FireAnim\Fire112.dds" />
+    <Image Include="Textures\FireAnim\Fire113.dds" />
+    <Image Include="Textures\FireAnim\Fire114.dds" />
+    <Image Include="Textures\FireAnim\Fire115.dds" />
+    <Image Include="Textures\FireAnim\Fire116.dds" />
+    <Image Include="Textures\FireAnim\Fire117.dds" />
+    <Image Include="Textures\FireAnim\Fire118.dds" />
+    <Image Include="Textures\FireAnim\Fire119.dds" />
+    <Image Include="Textures\FireAnim\Fire120.dds" />
+    <Image Include="Textures\grass.dds" />
+    <Image Include="Textures\Highmaps\island-heightmap.bmp" />
+    <Image Include="Textures\Highmaps\not_wo10.bmp" />
+    <Image Include="Textures\Highmaps\not_wo10.jpg" />
+    <Image Include="Textures\ice.dds" />
+    <Image Include="Textures\water1.dds" />
+    <Image Include="Textures\water2.dds" />
+    <Image Include="Textures\WireFence.dds" />
+    <Image Include="Textures\WoodCrate01.dds" />
+    <Image Include="Textures\WoodCrate02.dds" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

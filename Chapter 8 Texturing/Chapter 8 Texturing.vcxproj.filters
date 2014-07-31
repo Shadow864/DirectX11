@@ -1,0 +1,644 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <FxCompile Include="FX\LightHelper.fx">
+      <Filter>Resource Files\FX</Filter>
+    </FxCompile>
+    <FxCompile Include="FX\color.fx">
+      <Filter>Resource Files\FX</Filter>
+    </FxCompile>
+    <FxCompile Include="FX\Basic.fx">
+      <Filter>Resource Files\FX</Filter>
+    </FxCompile>
+    <FxCompile Include="FX\Billboard.fx">
+      <Filter>Resource Files\FX</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Chapter 8 Texturing.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="Chapter 8 Texturing.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Models\car.txt">
+      <Filter>Resource Files\Models</Filter>
+    </Text>
+    <Text Include="Models\skull.txt">
+      <Filter>Resource Files\Models</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{53b1a5ee-8cc3-4960-8fee-b3187be7f061}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Models">
+      <UniqueIdentifier>{7098b21f-f178-4bf9-9abb-162012b76898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\FX">
+      <UniqueIdentifier>{16494781-911b-4c1e-8485-f89844d1c455}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Textures">
+      <UniqueIdentifier>{e7c70000-f397-4abf-864b-c40cfe24a09e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Textures\FireAnim">
+      <UniqueIdentifier>{15a4ed6e-a2d9-497a-98ce-f1df3a98c7f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Textures\Highmaps">
+      <UniqueIdentifier>{d169707d-82ad-4a5e-a1cf-4ed4a65fe0bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Textures\BoltAnim">
+      <UniqueIdentifier>{7e33b7de-af6c-4a38-a9a2-298ee7b66686}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Textures\darkbrick.bmp">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Textures\darkbrickdxt1.dds">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Textures\WoodCrate01.dds">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Textures\WoodCrate02.dds">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire001.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire002.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire003.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire004.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire005.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire006.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire007.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire008.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire009.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire010.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire011.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire012.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire013.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire014.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire015.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire016.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire017.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire018.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire019.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire020.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire021.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire022.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire023.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire024.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire025.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire026.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire027.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire028.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire029.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire030.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire031.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire032.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire033.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire034.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire035.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire036.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire037.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire038.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire039.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire040.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire041.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire042.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire043.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire044.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire045.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire046.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire047.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire048.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire049.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire050.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire051.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire052.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire053.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire054.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire055.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire056.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire057.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire058.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire059.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire060.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire061.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire062.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire063.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire064.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire065.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire066.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire067.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire068.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire069.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire070.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire071.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire072.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire073.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire074.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire075.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire076.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire077.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire078.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire079.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire080.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire081.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire082.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire083.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire084.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire085.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire086.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire087.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire088.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire089.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire090.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire091.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire092.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire093.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire094.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire095.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire096.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire097.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire098.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire099.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire100.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire101.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire102.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire103.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire104.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire105.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire106.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire107.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire108.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire109.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire110.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire111.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire112.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire113.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire114.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire115.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire116.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire117.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire118.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire119.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\FireAnim\Fire120.dds">
+      <Filter>Resource Files\Textures\FireAnim</Filter>
+    </Image>
+    <Image Include="Textures\grass.dds">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Textures\water1.dds">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Textures\water2.dds">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Textures\Highmaps\island-heightmap.bmp">
+      <Filter>Resource Files\Textures\Highmaps</Filter>
+    </Image>
+    <Image Include="Textures\Highmaps\not_wo10.jpg">
+      <Filter>Resource Files\Textures\Highmaps</Filter>
+    </Image>
+    <Image Include="Textures\Highmaps\not_wo10.bmp">
+      <Filter>Resource Files\Textures\Highmaps</Filter>
+    </Image>
+    <Image Include="Textures\WireFence.dds">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Textures\checkboard.dds">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Textures\ice.dds">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Textures\brick01.dds">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt001.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt002.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt003.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt004.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt005.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt006.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt007.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt008.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt009.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt010.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt011.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt012.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt013.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt014.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt015.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt016.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt017.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt018.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt019.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt020.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt021.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt022.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt023.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt024.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt025.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt026.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt027.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt028.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt029.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt030.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt031.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt032.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt033.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt034.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt035.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt036.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt037.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt038.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt039.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt040.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt041.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt042.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt043.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt044.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt045.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt046.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt047.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt048.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt049.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt050.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt051.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt052.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt053.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt054.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt055.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt056.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt057.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt058.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt059.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+    <Image Include="Textures\BoltAnim\Bolt060.dds">
+      <Filter>Resource Files\Textures\BoltAnim</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
