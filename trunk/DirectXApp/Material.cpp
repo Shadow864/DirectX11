@@ -19,13 +19,15 @@ Material::~Material()
 }
 
 
+void Material::Initialize(ID3D11Device* device)
+{
+	m_Effect = ContentManager::GetInstance().m_EffectManager->GetEffect(m_EffectType);
+}
+
 bool Material::LoadContent(ID3D11Device* device)
 {
 	if (m_DiffuseMap)
 		m_DiffuseMap->LoadContent(device);
-
-
-	m_Effect = ContentManager::GetInstance().m_EffectManager->GetEffect(m_EffectType);
 
 	return true;
 }
@@ -48,10 +50,10 @@ ID3DX11EffectTechnique* Material::GetTechnique()
 {
 	if (m_DiffuseMap)
 	{
-		return m_Effect->m_TechLightTexture;
+		return m_Effect->GetTechnique(1);
 	}
 	else
 	{
-		return m_Effect->m_TechLight;
+		return  m_Effect->GetTechnique(0);
 	}
 }

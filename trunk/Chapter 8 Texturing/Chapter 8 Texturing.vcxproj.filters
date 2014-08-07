@@ -640,5 +640,17 @@
     <Image Include="Textures\BoltAnim\Bolt060.dds">
       <Filter>Resource Files\Textures\BoltAnim</Filter>
     </Image>
+    <Image Include="Textures\tree0.dds">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Textures\tree1.dds">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Textures\tree2.dds">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Textures\tree3.dds">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>

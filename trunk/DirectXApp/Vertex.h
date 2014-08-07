@@ -5,14 +5,10 @@
 
 struct ID3DX11EffectTechnique;
 class EffectsManager;
+class MeshData;
 
 namespace Vertex
 {
-	struct PosNormal
-	{
-		DirectX::XMFLOAT3 Pos;
-		DirectX::XMFLOAT3 Normal;
-	};
 
 	struct PosSize
 	{

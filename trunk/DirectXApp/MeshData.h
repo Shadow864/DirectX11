@@ -4,73 +4,57 @@
 
 #include <vector>
 #include <DirectXMath.h>
+class GeometryGenerator;
+class Model;
 
-class IMeshData
+struct ID3D11Buffer;
+
+#define DECLARE_MESH_FIELD(TYPE, NAME)				\
+	public:											\
+	const std::vector<##TYPE>& Get ##NAME() const	\
+		{											\
+			return 	m_##NAME;						\
+		}											\
+	public:										\
+	std::vector<##TYPE>	m_##NAME;					\
+
+
+class MeshData 
 {
-public:
+	DECLARE_MESH_FIELD(DirectX::XMFLOAT3, Positions)
+	DECLARE_MESH_FIELD(DirectX::XMFLOAT3, Normals)
+	DECLARE_MESH_FIELD(DirectX::XMFLOAT3, Binormals)
+	DECLARE_MESH_FIELD(DirectX::XMFLOAT3, Tangents)
+	DECLARE_MESH_FIELD(DirectX::XMFLOAT2, TexCoords)
+	DECLARE_MESH_FIELD(DirectX::XMFLOAT2, Sizes)
+	DECLARE_MESH_FIELD(DirectX::XMFLOAT4, Colors)
+	DECLARE_MESH_FIELD(UINT, Indices)
 
-	virtual const void*		GetVerticesPtr		() const = 0;
-	virtual const void*		GetIndicesPtr		() const = 0;
-	virtual unsigned int	GetVertexSize		() const = 0;
-	virtual unsigned int	GetIndexSize		() const = 0;
-	virtual unsigned int	GetVerticesNumber	() const = 0;
-	virtual unsigned int	GetIndicesNumber	() const = 0;
 
-	virtual					~IMeshData			(){};
+	friend GeometryGenerator;
+	friend Model;
 };
-
-class MeshData : public IMeshData
-{
-public:
-	struct Vertex
-	{
-		Vertex();
-		Vertex(float x, float y, float z, float r, float g, float b);
-
-		Vertex(const DirectX::XMFLOAT3& position, const DirectX::XMFLOAT2&  size);
-		Vertex(const DirectX::XMFLOAT3& position, const DirectX::XMFLOAT3&  normal);
-		Vertex(const DirectX::XMFLOAT3& position, const DirectX::XMFLOAT3&  normal, const DirectX::XMFLOAT2& tex_coord);
-		Vertex(const DirectX::XMFLOAT3& position, const DirectX::XMFLOAT3&  normal, const DirectX::XMFLOAT4& color);
-
-
-		friend std::istream & operator>>(std::istream &in, Vertex& ver);
-
-
-		DirectX::XMFLOAT3 Position;
-		DirectX::XMFLOAT3 Normal;
-		DirectX::XMFLOAT2 TexCoord;
-		DirectX::XMFLOAT2 Size;
-		DirectX::XMFLOAT4 Color;
-		DirectX::XMFLOAT3 Binormal;
-		DirectX::XMFLOAT3 Tangent;
-
-
-
-
-	};
-
-public:
-
-	MeshData();
-
-	///
-	/// IMeshData implementation
-	///
-	virtual const void*		GetVerticesPtr		() const	{ return &m_Vertices[0];		}
-	virtual const void*		GetIndicesPtr		() const	{ return &m_Indices[0];			}
-	virtual unsigned int	GetVertexSize		() const	{ return sizeof(Vertex);		}
-	virtual unsigned int	GetIndexSize		() const	{ return sizeof(unsigned int);	}
-	virtual unsigned int	GetVerticesNumber	() const	{ return static_cast<unsigned int>(m_Vertices.size());		}
-	virtual unsigned int	GetIndicesNumber	() const	{ return static_cast<unsigned int>(m_Indices.size()); }
-
-public:
-	std::vector<Vertex>			m_Vertices;
-	std::vector<unsigned int>	m_Indices;
-
-};
-
-
-
+//
+//std::istream & operator>>(std::istream &in, DirectX::XMFLOAT3& ver)
+//{
+//
+//	in >> ver.x;
+//	in >> ver.y;
+//	in >> ver.z;
+//
+//	return in;
+//}
+//
+//
+//std::istream & operator>>(std::istream &in, DirectX::XMFLOAT2& ver)
+//{
+//
+//	in >> ver.x;
+//	in >> ver.y;
+//
+//	return in;
+//}
+//
 
 
 #endif // ! MESHDATA_H

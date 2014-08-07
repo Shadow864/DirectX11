@@ -26,9 +26,6 @@
 
 ModelObject::ModelObject()
 : m_Material(nullptr)
-, m_IndicesNumber(0)
-, m_IndicesOffset(0)
-, m_VerticesOffset(0)
 , m_CastShadow(false)
 {
 	SetScale(1, 1, 1);
@@ -77,50 +74,26 @@ ModelObject::~ModelObject(void)
 
 void ModelObject::Initialize(ID3D11Device* device)
 {
-	m_IndicesOffset = 0;// m_Data->m_Indices.size();
-	m_VerticesOffset = 0;// = m_Data->m_Vertices.size();
-	m_IndicesNumber = m_Data->GetIndicesNumber();
 
-	//data->m_Indices.insert(data->m_Indices.end(), m_Data->m_Indices.begin(), m_Data->m_Indices.end());
-	//data->m_Vertices.insert(data->m_Vertices.end(), m_Data->m_Vertices.begin(), m_Data->m_Vertices.end());
-
-	//m_Data = data;
+	if (m_Material)
+		m_Material->Initialize(device);
 
 
-	D3D11_BUFFER_DESC vbd;
+	m_Material->CreateVertexBuffer(device, m_Data.get(), &m_VerticesBuffer);
 
-	vbd.ByteWidth = m_Data->GetVertexSize() * m_Data->GetVerticesNumber();
-	vbd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	vbd.MiscFlags = 0;
-
-	/*if (Dynamic)
-	{
-	vbd.Usage = D3D11_USAGE_DYNAMIC;
-	vbd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	}
-	else*/
-	{
-		vbd.Usage = D3D11_USAGE_IMMUTABLE;
-		vbd.CPUAccessFlags = 0;
-	}
-
-	D3D11_SUBRESOURCE_DATA vinitData;
-	vinitData.pSysMem = m_Data->GetVerticesPtr();
-	device->CreateBuffer(&vbd, &vinitData, &m_VerticesBuffer);
-
-
-	//////////////////////////
 
 	D3D11_BUFFER_DESC ibd;
 	ibd.Usage = D3D11_USAGE_IMMUTABLE;
-	ibd.ByteWidth = m_Data->GetIndexSize() * m_Data->GetIndicesNumber();
+	ibd.ByteWidth = sizeof(UINT)* m_Data->GetIndices().size();
 	ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	ibd.CPUAccessFlags = 0;
 	ibd.MiscFlags = 0;
 
 	D3D11_SUBRESOURCE_DATA iinitData;
-	iinitData.pSysMem = m_Data->GetIndicesPtr();
+	iinitData.pSysMem = &m_Data->GetIndices()[0];
 	device->CreateBuffer(&ibd, &iinitData, &m_IndicesBuffer);
+
+
 
 }
 
@@ -250,8 +223,8 @@ void Wave::UpdateMesh()
 	{
 		for (UINT j = 0; j < m_N; ++j)
 		{
-			m_Data->m_Vertices[i * m_M + j].Position.y = GetHeight(i, j, m_M, m_N, m_Time);
-			m_Data->m_Vertices[i * m_M + j].Normal = GetNormal(i, j, m_M, m_N, m_Time);
+			m_Data->m_Positions[i * m_M + j].y = GetHeight(i, j, m_M, m_N, m_Time);
+			m_Data->m_Normals[i * m_M + j] = GetNormal(i, j, m_M, m_N, m_Time);
 		}
 	}
 }

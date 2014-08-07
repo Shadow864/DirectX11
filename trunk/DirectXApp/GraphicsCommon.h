@@ -55,3 +55,12 @@ enum class EffectType
 	BILLBOARD,
 	COUNT
 };
+
+enum class VertexType
+{
+	PosNormal,
+	PosSize,
+	PosNormalTexCoord,
+
+};
+

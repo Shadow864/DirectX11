@@ -422,6 +422,10 @@
     <Image Include="Textures\Highmaps\not_wo10.bmp" />
     <Image Include="Textures\Highmaps\not_wo10.jpg" />
     <Image Include="Textures\ice.dds" />
+    <Image Include="Textures\tree0.dds" />
+    <Image Include="Textures\tree1.dds" />
+    <Image Include="Textures\tree2.dds" />
+    <Image Include="Textures\tree3.dds" />
     <Image Include="Textures\water1.dds" />
     <Image Include="Textures\water2.dds" />
     <Image Include="Textures\WireFence.dds" />

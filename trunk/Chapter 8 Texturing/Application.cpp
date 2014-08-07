@@ -145,9 +145,6 @@ void Application::Draw()
 	m_DeviceContextPtr->ClearRenderTargetView(m_RenderTargetView, color);
 	m_DeviceContextPtr->ClearDepthStencilView(m_DepthStencilView, D3D11_CLEAR_DEPTH|D3D11_CLEAR_STENCIL, 1.0f, 0);
 
-	
-
-
 	DirectX::XMMATRIX view = DirectX::XMLoadFloat4x4(&m_View);
 	DirectX::XMMATRIX proj = DirectX::XMLoadFloat4x4(&m_Proj);
 
@@ -195,8 +192,10 @@ void Application::Render(
 {
 	const float color[4] = { 0, 0, 0, 0 };
 
-	std::shared_ptr<BaseEffect> effect = material->m_Effect;
+	std::shared_ptr<Effect> effect = material->m_Effect;
 
+	if (!effect)
+		return;
 
 	if (material->m_EffectType == EffectType::BILLBOARD)
 	{
@@ -208,10 +207,6 @@ void Application::Render(
 		m_DeviceContextPtr->IASetInputLayout(m_InputLayoutsManager->PosNormalTexCoord);
 		m_DeviceContextPtr->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	}
-	//effect
-
-
-
 
 	DirectX::FXMVECTOR fog_color = DirectX::XMVectorSet(0.4f, 0.4f, 0.4f, 1.0f);
 
@@ -236,8 +231,6 @@ void Application::Render(
 	technique->GetDesc(&techDesc);
 
 
-	
-
 	for (UINT p = 0; p < techDesc.Passes; ++p)
 	{
 		DirectX::XMMATRIX worldInvTranspose = MathHelper::InverseTranspose(world);
@@ -260,13 +253,13 @@ void Application::Render(
 }
 void Application::RenderModelObject(const ModelObject* object, DirectX::CXMMATRIX matrix, std::shared_ptr<Material> material)
 {
-	UINT stride = object->GetMeshData()->GetVertexSize();
+	UINT stride = object->GetMaterial()->VertexSize();
 	UINT offset = 0;
 	ID3D11Buffer* vertex_buffer =	object->GetVerticesBuffer();
 	ID3D11Buffer* index_buffer = object->GetIndicesBuffer();
-	UINT index_count = object->m_IndicesNumber;
-	UINT start_index_location = object->m_IndicesOffset;
-	INT base_vertex_location = object->m_VerticesOffset;
+	UINT index_count = object->GetMeshData()->GetIndices().size();
+	UINT start_index_location = 0;// object->m_IndicesOffset;
+	INT base_vertex_location = 0;// object->m_VerticesOffset;
 	DirectX::CXMMATRIX world = object->GetWorldMatrix() * matrix;
 	
 
@@ -309,7 +302,7 @@ void Application::RenderMirror(const MirrorObject* mirror, DirectX::CXMMATRIX ma
 	m_GraphicsDevice->RenderState->SetDepthStencilMode(DepthStencilMode::NONE, 0, Scope::OBJECT);
 	m_GraphicsDevice->RenderState->Reset(Scope::OBJECT);
 	
-	//RenderModelObject(mirror, matrix, material);
+	RenderModelObject(mirror, matrix, material);
 	
 }
 
@@ -448,8 +441,8 @@ void Application::CreateObject(UINT id)
 	{
 
 		ModelObject* Wall1 = new Billboard();// Cylinder(1, 1, 2, 6, 6);
-		Wall1->SetMaterial(ContentManager::GetInstance().m_MaterialManager->Billboard);
-		Wall1->SetPosition(0, 0, 2);
+		Wall1->SetMaterial(ContentManager::GetInstance().m_MaterialManager->Tree);
+		Wall1->SetPosition(1, -0.5, 1);
 		m_ModelObjects.push_back(Wall1);
 		
 		
@@ -494,7 +487,6 @@ void Application::CreateObject(UINT id)
 			m_ModelObjects.push_back(wall);
 		}
 
-		
 	}
 
 	for (auto model : m_ModelObjects)
@@ -514,7 +506,7 @@ void Application::CreateLights()
 	m_Light.Specular = DirectX::XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
 	m_Light.Direction = DirectX::XMFLOAT3(0.57735f, -0.57735f, 0.57735f);
 
-
+	ContentManager::GetInstance().m_MaterialManager->Shadow->Initialize(m_DevicePtr);
 	ContentManager::GetInstance().m_MaterialManager->Shadow->LoadContent(m_DevicePtr);
 }
 
