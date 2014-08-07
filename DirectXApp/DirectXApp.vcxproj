@@ -148,6 +148,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BasicMaterial.h" />
+    <ClInclude Include="BillboardMaterial.h" />
     <ClInclude Include="ContentManager.h" />
     <ClInclude Include="DirectXApp.h" />
     <ClInclude Include="Effects\Effect.h" />
@@ -172,6 +174,8 @@
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BasicMaterial.cpp" />
+    <ClCompile Include="BillboardMaterial.cpp" />
     <ClCompile Include="ContentManager.cpp" />
     <ClCompile Include="DirectXApp.cpp" />
     <ClCompile Include="Effects\Effect.cpp" />

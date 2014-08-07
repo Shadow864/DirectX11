@@ -9,8 +9,6 @@ class GeometryGenerator
 	struct face
 	{
 
-
-		
 		UINT i1;
 		UINT i2;
 		UINT i3;
@@ -25,8 +23,8 @@ public:
 
 	void Subdivide					(MeshData& meshData) const;
 	void ComputeNormals				(MeshData& meshData) const;
-	void ComputeNormals				(MeshData::Vertex& vertex, const std::vector<UINT>& indices, const std::vector<MeshData::Vertex>& vertices) const;
-	void ComputeNormals(MeshData::Vertex& vertex, const std::vector<face>& faces) const;
+	//void ComputeNormals				(MeshData::Vertex& vertex, const std::vector<UINT>& indices, const std::vector<MeshData::Vertex>& vertices) const;
+	void ComputeNormals				(MeshData& meshData, const std::vector<face>& faces, UINT index) const;
 
 	void CreateTriangle				(MeshData& meshData) const;
 	void CreateSierpinskiTrinagle	(MeshData& meshData, UINT level)const;

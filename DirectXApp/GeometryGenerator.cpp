@@ -21,7 +21,7 @@ void GeometryGenerator::Subdivide(MeshData& meshData) const
 	MeshData inputCopy = meshData;
 
 
-	meshData.m_Vertices.resize(0);
+	meshData.m_Positions.resize(0);
 	meshData.m_Indices.resize(0);
 
 	//       v1
@@ -34,69 +34,69 @@ void GeometryGenerator::Subdivide(MeshData& meshData) const
 	// *-----*-----*
 	// v0    m2     v2
 
-	UINT numTris = inputCopy.m_Indices.size()/3;
-	for(UINT i = 0; i < numTris; ++i)
-	{
-		MeshData::Vertex v0 = inputCopy.m_Vertices[inputCopy.m_Indices[i * 3 + 0]];
-		MeshData::Vertex v1 = inputCopy.m_Vertices[inputCopy.m_Indices[i * 3 + 1]];
-		MeshData::Vertex v2 = inputCopy.m_Vertices[inputCopy.m_Indices[i * 3 + 2]];
+	//UINT numTris = inputCopy.m_Indices.size()/3;
+	//for(UINT i = 0; i < numTris; ++i)
+	//{
+	//	MeshData::Vertex v0 = inputCopy.m_Vertices[inputCopy.m_Indices[i * 3 + 0]];
+	//	MeshData::Vertex v1 = inputCopy.m_Vertices[inputCopy.m_Indices[i * 3 + 1]];
+	//	MeshData::Vertex v2 = inputCopy.m_Vertices[inputCopy.m_Indices[i * 3 + 2]];
 
-		//
-		// Generate the midpoints.
-		//
+	//	//
+	//	// Generate the midpoints.
+	//	//
 
-		MeshData::Vertex m0, m1, m2;
+	//	MeshData::Vertex m0, m1, m2;
 
-		// For subdivision, we just care about the position component.  We derive the other
-		// vertex components in CreateGeosphere.
+	//	// For subdivision, we just care about the position component.  We derive the other
+	//	// vertex components in CreateGeosphere.
 
-		m0.Position = DirectX::XMFLOAT3(
-			0.5f*(v0.Position.x + v1.Position.x),
-			0.5f*(v0.Position.y + v1.Position.y),
-			0.5f*(v0.Position.z + v1.Position.z));
+	//	m0.Position = DirectX::XMFLOAT3(
+	//		0.5f*(v0.Position.x + v1.Position.x),
+	//		0.5f*(v0.Position.y + v1.Position.y),
+	//		0.5f*(v0.Position.z + v1.Position.z));
 
-		m1.Position = DirectX::XMFLOAT3(
-			0.5f*(v1.Position.x + v2.Position.x),
-			0.5f*(v1.Position.y + v2.Position.y),
-			0.5f*(v1.Position.z + v2.Position.z));
+	//	m1.Position = DirectX::XMFLOAT3(
+	//		0.5f*(v1.Position.x + v2.Position.x),
+	//		0.5f*(v1.Position.y + v2.Position.y),
+	//		0.5f*(v1.Position.z + v2.Position.z));
 
-		m2.Position = DirectX::XMFLOAT3(
-			0.5f*(v0.Position.x + v2.Position.x),
-			0.5f*(v0.Position.y + v2.Position.y),
-			0.5f*(v0.Position.z + v2.Position.z));
+	//	m2.Position = DirectX::XMFLOAT3(
+	//		0.5f*(v0.Position.x + v2.Position.x),
+	//		0.5f*(v0.Position.y + v2.Position.y),
+	//		0.5f*(v0.Position.z + v2.Position.z));
 
-		//
-		// Add new geometry.
-		//
+	//	//
+	//	// Add new geometry.
+	//	//
 
-		meshData.m_Vertices.push_back(v0); // 0
-		meshData.m_Vertices.push_back(v1); // 1
-		meshData.m_Vertices.push_back(v2); // 2
-		meshData.m_Vertices.push_back(m0); // 3
-		meshData.m_Vertices.push_back(m1); // 4
-		meshData.m_Vertices.push_back(m2); // 5
- 
-		meshData.m_Indices.push_back(i*6+0);
-		meshData.m_Indices.push_back(i*6+3);
-		meshData.m_Indices.push_back(i*6+5);
+	//	meshData.m_Vertices.push_back(v0); // 0
+	//	meshData.m_Vertices.push_back(v1); // 1
+	//	meshData.m_Vertices.push_back(v2); // 2
+	//	meshData.m_Vertices.push_back(m0); // 3
+	//	meshData.m_Vertices.push_back(m1); // 4
+	//	meshData.m_Vertices.push_back(m2); // 5
+ //
+	//	meshData.m_Indices.push_back(i*6+0);
+	//	meshData.m_Indices.push_back(i*6+3);
+	//	meshData.m_Indices.push_back(i*6+5);
 
-		meshData.m_Indices.push_back(i*6+3);
-		meshData.m_Indices.push_back(i*6+4);
-		meshData.m_Indices.push_back(i*6+5);
+	//	meshData.m_Indices.push_back(i*6+3);
+	//	meshData.m_Indices.push_back(i*6+4);
+	//	meshData.m_Indices.push_back(i*6+5);
 
-		meshData.m_Indices.push_back(i*6+5);
-		meshData.m_Indices.push_back(i*6+4);
-		meshData.m_Indices.push_back(i*6+2);
+	//	meshData.m_Indices.push_back(i*6+5);
+	//	meshData.m_Indices.push_back(i*6+4);
+	//	meshData.m_Indices.push_back(i*6+2);
 
-		meshData.m_Indices.push_back(i*6+3);
-		meshData.m_Indices.push_back(i*6+1);
-		meshData.m_Indices.push_back(i*6+4);
-	}
+	//	meshData.m_Indices.push_back(i*6+3);
+	//	meshData.m_Indices.push_back(i*6+1);
+	//	meshData.m_Indices.push_back(i*6+4);
+	//}
 }
 
 void GeometryGenerator::ComputeNormals(MeshData& meshData) const
 {
-	for (UINT i = 0; i < meshData.m_Vertices.size(); ++i)
+	for (UINT i = 0; i < meshData.m_Positions.size(); ++i)
 	{
 
 		std::vector<UINT> neightboors; 
@@ -119,35 +119,34 @@ void GeometryGenerator::ComputeNormals(MeshData& meshData) const
 		}
 
 		
-		ComputeNormals(meshData.m_Vertices[i], neightboors, meshData.m_Vertices);
+		//ComputeNormals(meshData.m_Vertices[i], neightboors, meshData.m_Vertices);
 	}
 }
 
-void GeometryGenerator::ComputeNormals(MeshData::Vertex& vertex, const std::vector<UINT>& indices, const std::vector<MeshData::Vertex>& vertices) const
-{
-	DirectX::XMVECTOR normal = DirectX::XMVectorZero();
-	for (UINT i = 0; i < indices.size();)
-	{
-		DirectX::XMVECTOR p0 = DirectX::XMLoadFloat3(&vertices[indices[i + 0]].Position);
-		DirectX::XMVECTOR p1 = DirectX::XMLoadFloat3(&vertices[indices[i + 1]].Position);
-		DirectX::XMVECTOR p2 = DirectX::XMLoadFloat3(&vertices[indices[i + 2]].Position);
-
-		DirectX::XMVECTOR v0 = DirectX::XMVectorSubtract(p0, p1);
-		DirectX::XMVECTOR v1 = DirectX::XMVectorSubtract(p1, p2);
-
-		DirectX::XMVECTOR face_normal = DirectX::XMVector3Cross(v0, v1);
-
-		normal = DirectX::XMVectorAdd(normal, face_normal);
-
-		i = i + 3;
-	}
-
-	normal = DirectX::XMVector3Normalize(normal);
-
-	DirectX::XMStoreFloat3(&vertex.Normal, normal);
-}
-
-void GeometryGenerator::ComputeNormals(MeshData::Vertex& vertex, const std::vector<face>& faces) const
+//void GeometryGenerator::ComputeNormals(MeshData::Vertex& vertex, const std::vector<UINT>& indices, const std::vector<MeshData::Vertex>& vertices) const
+//{
+//	DirectX::XMVECTOR normal = DirectX::XMVectorZero();
+//	for (UINT i = 0; i < indices.size();)
+//	{
+//		DirectX::XMVECTOR p0 = DirectX::XMLoadFloat3(&vertices[indices[i + 0]].Position);
+//		DirectX::XMVECTOR p1 = DirectX::XMLoadFloat3(&vertices[indices[i + 1]].Position);
+//		DirectX::XMVECTOR p2 = DirectX::XMLoadFloat3(&vertices[indices[i + 2]].Position);
+//
+//		DirectX::XMVECTOR v0 = DirectX::XMVectorSubtract(p0, p1);
+//		DirectX::XMVECTOR v1 = DirectX::XMVectorSubtract(p1, p2);
+//
+//		DirectX::XMVECTOR face_normal = DirectX::XMVector3Cross(v0, v1);
+//
+//		normal = DirectX::XMVectorAdd(normal, face_normal);
+//
+//		i = i + 3;
+//	}
+//
+//	normal = DirectX::XMVector3Normalize(normal);
+//
+//	DirectX::XMStoreFloat3(&vertex.Normal, normal);
+//}
+void GeometryGenerator::ComputeNormals(MeshData& meshData, const std::vector<face>& faces, UINT index) const
 {
 	DirectX::XMVECTOR normal = DirectX::XMVectorZero();
 	for each (auto face in faces)
@@ -157,15 +156,23 @@ void GeometryGenerator::ComputeNormals(MeshData::Vertex& vertex, const std::vect
 
 	normal = DirectX::XMVector3Normalize(normal);
 
-	DirectX::XMStoreFloat3(&vertex.Normal, normal);
+	DirectX::XMStoreFloat3(&meshData.m_Normals[index], normal);
 }
 
 void GeometryGenerator::CreateTriangle(MeshData& meshData) const
 {
 
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(-0.5f, -0.5f, 0.0f), DirectX::XMFLOAT3(0.f, 0.f, 1.f), DirectX::XMFLOAT2(0,0)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(0.0f, 0.5f, 0.0f), DirectX::XMFLOAT3(0.f, 0.f, 1.f), DirectX::XMFLOAT2(0.5, 1)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(0.5f, -0.5f, 0.0f), DirectX::XMFLOAT3(0.f, 0.f, 1.f), DirectX::XMFLOAT2(1, 0)));
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(-0.5f, -0.5f, 0.0f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.f, 0.f, 1.f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(0, 0));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0.0f, 0.5f, 0.0f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.f, 0.f, 1.f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(0.5, 1));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0.5f, -0.5f, 0.0f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.f, 0.f, 1.f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(1, 0));
 
 	meshData.m_Indices.push_back(0);
 	meshData.m_Indices.push_back(1);
@@ -177,14 +184,25 @@ void GeometryGenerator::CreateTriangle(MeshData& meshData) const
 void GeometryGenerator::CreatePyramid(MeshData& meshData) const
 {
 	meshData.m_Indices.clear();
-	meshData.m_Vertices.clear();
+	meshData.m_Positions.clear();
+	meshData.m_Normals.clear();
 
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(-0.5f, -0.5f, -0.5f), DirectX::XMFLOAT3(-0.5f, -0.5f, -0.5f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(-0.5f, -0.5f, 0.5f), DirectX::XMFLOAT3(-0.5f, -0.5f, -0.5f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(0.5f, -0.5f, 0.5f), DirectX::XMFLOAT3(-0.5f, -0.5f, -0.5f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(0.5f, -0.5f, -0.5f), DirectX::XMFLOAT3(-0.5f, -0.5f, -0.5f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(0.0f, 0.5f, 0.0f), DirectX::XMFLOAT3(0.f, 1.f, 0.f)));
-	
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(-0.5f, -0.5f, -0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(-0.5f, -0.5f, -0.5f));
+		
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(-0.5f, -0.5f, 0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(-0.5f, -0.5f, -0.5f));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0.5f, -0.5f, 0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(-0.5f, -0.5f, -0.5f));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0.5f, -0.5f, -0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(-0.5f, -0.5f, -0.5f));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0.0f, 0.5f, 0.0f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.f, 1.f, 0.f));
+
 	meshData.m_Indices.push_back(0);
 	meshData.m_Indices.push_back(1);
 	meshData.m_Indices.push_back(4);
@@ -215,7 +233,7 @@ void GeometryGenerator::CreatePyramid(MeshData& meshData) const
 void GeometryGenerator::CreateSierpinskiTrinagle(MeshData& meshData, UINT level) const
 {
 	meshData.m_Indices.clear();
-	meshData.m_Vertices.clear();
+	meshData.m_Positions.clear();
 
 	CreateSierpinskiTrinagle(meshData, 0, level, DirectX::XMFLOAT3(0,0,0), 0.5f);
 
@@ -233,13 +251,18 @@ void GeometryGenerator::CreateSierpinskiTrinagle(MeshData& meshData, UINT level,
 
 	if ( level == max_level)
 	{
-		meshData.m_Vertices.push_back(MeshData::Vertex(pos.x - scale, pos.y - scale, pos.z, 1.0f, 1.0f, 1.0f));
-		meshData.m_Vertices.push_back(MeshData::Vertex(pos.x, pos.y + scale, pos.z, 1.0f, 1.0f, 1.0f));
-		meshData.m_Vertices.push_back(MeshData::Vertex(pos.x + scale, pos.y - scale, pos.z, 1.0f, 1.0f, 1.0f));
+		meshData.m_Positions.push_back(DirectX::XMFLOAT3(pos.x - scale, pos.y - scale, pos.z));
+		meshData.m_Normals.push_back(DirectX::XMFLOAT3(1.0f, 1.0f, 1.0f));
 
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 3);
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 2);
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 1);
+		meshData.m_Positions.push_back(DirectX::XMFLOAT3(pos.x, pos.y + scale, pos.z));
+		meshData.m_Normals.push_back(DirectX::XMFLOAT3(1.0f, 1.0f, 1.0f));
+
+		meshData.m_Positions.push_back(DirectX::XMFLOAT3(pos.x + scale, pos.y - scale, pos.z));
+		meshData.m_Normals.push_back(DirectX::XMFLOAT3(1.0f, 1.0f, 1.0f));
+
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 3);
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 2);
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 1);
 
 	}
 	else  
@@ -253,7 +276,7 @@ void GeometryGenerator::CreateSierpinskiTrinagle(MeshData& meshData, UINT level,
 void GeometryGenerator:: CreateSierpinskiPyramid(MeshData& meshData, UINT level) const
 {
 	meshData.m_Indices.clear();
-	meshData.m_Vertices.clear();
+	meshData.m_Positions.clear();
 
 	CreateSierpinskiPyramid(meshData, 0, level, DirectX::XMFLOAT3(0,0,0), 0.5f);
 
@@ -272,36 +295,42 @@ void GeometryGenerator::CreateSierpinskiPyramid(MeshData& meshData, UINT level, 
 	if ( level == max_level)
 	{
 
-		meshData.m_Vertices.push_back(MeshData::Vertex(pos.x - scale, pos.y - scale, pos.z - scale, 1.0f, 0.0f, 0.0f));
-		meshData.m_Vertices.push_back(MeshData::Vertex(pos.x - scale, pos.y - scale, pos.z + scale, 0.0f, 1.0f, 0.0f));
-		meshData.m_Vertices.push_back(MeshData::Vertex(pos.x + scale, pos.y - scale, pos.z + scale, 0.0f, 0.0f, 1.0f));
-		meshData.m_Vertices.push_back(MeshData::Vertex(pos.x + scale, pos.y - scale, pos.z - scale, 1.0f, 1.0f, 0.0f));
-		meshData.m_Vertices.push_back(MeshData::Vertex(pos.x, pos.y + scale, pos.z, 0.0f, 1.0f, 1.0f));
+		meshData.m_Positions.push_back(DirectX::XMFLOAT3(pos.x - scale, pos.y - scale, pos.z - scale));
+		meshData.m_Positions.push_back(DirectX::XMFLOAT3(pos.x - scale, pos.y - scale, pos.z + scale));
+		meshData.m_Positions.push_back(DirectX::XMFLOAT3(pos.x + scale, pos.y - scale, pos.z + scale));
+		meshData.m_Positions.push_back(DirectX::XMFLOAT3(pos.x + scale, pos.y - scale, pos.z - scale));
+		meshData.m_Positions.push_back(DirectX::XMFLOAT3(pos.x, pos.y + scale, pos.z));
+
+		meshData.m_Normals.push_back(DirectX::XMFLOAT3(1.0f, 0.0f, 0.0f));
+		meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f));
+		meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.0f, 0.0f, 1.0f));
+		meshData.m_Normals.push_back(DirectX::XMFLOAT3(1.0f, 1.0f, 0.0f));
+		meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.0f, 1.0f, 1.0f));
 
 
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 5);
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 4);
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 1);
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 5);
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 4);
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 1);
 
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 4);
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 3);
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 1);
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 4);
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 3);
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 1);
 
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 3);
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 2);
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 1);
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 3);
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 2);
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 1);
 
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 2);
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 5);
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 1);
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 2);
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 5);
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 1);
 
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 3);
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 4);
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 5);
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 3);
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 4);
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 5);
 
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 5);
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 2);
-		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Vertices.size()) - 3);
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 5);
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 2);
+		meshData.m_Indices.push_back(static_cast<UINT>(meshData.m_Positions.size()) - 3);
 
 	}
 	else  
@@ -318,12 +347,17 @@ void GeometryGenerator::CreateSierpinskiPyramid(MeshData& meshData, UINT level, 
 void GeometryGenerator::CreatePlane(MeshData& meshData) const
 {
 	meshData.m_Indices.clear();
-	meshData.m_Vertices.clear();
+	meshData.m_Positions.clear();
 
-	meshData.m_Vertices.push_back(MeshData::Vertex(-0.5f, -0.5f,  0.0f, 1.0f, 1.0f, 1.0f));
-	meshData.m_Vertices.push_back(MeshData::Vertex(-0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f));
-	meshData.m_Vertices.push_back(MeshData::Vertex(0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f));
-	meshData.m_Vertices.push_back(MeshData::Vertex(0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f));
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(-0.5f, -0.5f, 0.0f));
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(-0.5f, 0.5f, 0.0f));
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0.5f, 0.5f, 0.0f));
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0.5f, -0.5f, 0.0f));
+
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(1.0f, 1.0f, 1.0f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(1.0f, 1.0f, 1.0f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(1.0f, 1.0f, 1.0f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(1.0f, 1.0f, 1.0f));
 
 	meshData.m_Indices.push_back(2);
 	meshData.m_Indices.push_back(1);
@@ -339,7 +373,7 @@ void GeometryGenerator::CreatePlane(MeshData& meshData) const
 void GeometryGenerator::CreateGrid(MeshData& meshData, float width, float depth, UINT m, UINT n) const
 {
 	meshData.m_Indices.clear();
-	meshData.m_Vertices.clear();
+	meshData.m_Positions.clear();
 
 	UINT vertexCount = m*n;
 	UINT faceCount = (m-1)*(n-1)*2;
@@ -352,20 +386,24 @@ void GeometryGenerator::CreateGrid(MeshData& meshData, float width, float depth,
 	float dz = depth / (m-1);
 	float du = 1.0f / (n-1);
 	float dv = 1.0f / (m-1);
-	meshData.m_Vertices.resize(vertexCount);
+
+	meshData.m_Positions.resize(vertexCount);
+	meshData.m_Normals.resize(vertexCount);
+	meshData.m_Tangents.resize(vertexCount);
+	meshData.m_TexCoords.resize(vertexCount);
 	for(UINT i = 0; i < m; ++i)
 	{
 		float z = halfDepth - i*dz;
 		for(UINT j = 0; j < n; ++j)
 		{
 			float x = -halfWidth + j*dx;
-			meshData.m_Vertices[i*n+j].Position = DirectX::XMFLOAT3(x, 0, z);
+			meshData.m_Positions[i*n + j] = DirectX::XMFLOAT3(x, 0, z);
 			// Ignore for now, used for lighting.
-			meshData.m_Vertices[i*n + j].Normal = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);
-			meshData.m_Vertices[i*n + j].Tangent = DirectX::XMFLOAT3(1.0f, 0.0f, 0.0f);
+			meshData.m_Normals[i*n + j] = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);
+			meshData.m_Tangents[i*n + j] = DirectX::XMFLOAT3(1.0f, 0.0f, 0.0f);
 			// Ignore for now, used for texturing.
-			meshData.m_Vertices[i*n+j].TexCoord.x = j*du;
-			meshData.m_Vertices[i*n+j].TexCoord.y = i*dv;
+			meshData.m_TexCoords[i*n + j].x = j*du;
+			meshData.m_TexCoords[i*n + j].y = i*dv;
 		}	
 	}
 
@@ -393,7 +431,7 @@ void GeometryGenerator::CreateGrid(MeshData& meshData, float width, float depth,
 void GeometryGenerator::CreateCylinder(MeshData& meshData, float bottomRadius, float topRadius, float height, UINT sliceCount, UINT stackCount) const
 {
 	meshData.m_Indices.clear();
-	meshData.m_Vertices.clear();
+	meshData.m_Positions.clear();
 
 	BuildTopCap(meshData, bottomRadius, topRadius, height, sliceCount, stackCount);
 	
@@ -409,7 +447,7 @@ void GeometryGenerator::BuildTopCap(MeshData& meshData, float bottomRadius, floa
 	float theta			= 2.f * DirectX::XM_PI / sliceCount;
 	float y = height/2;
 
-	UINT indicex_index = meshData.GetVerticesNumber();
+	UINT indicex_index = meshData.m_Positions.size();
 
 	for (UINT slice = 0; slice < sliceCount; ++slice)
 	{
@@ -420,10 +458,12 @@ void GeometryGenerator::BuildTopCap(MeshData& meshData, float bottomRadius, floa
 		
 		float z = radius * sinf(theta * slice);
 
-		meshData.m_Vertices.push_back(MeshData::Vertex(x, y, z, 1, 1, 1));
+		meshData.m_Positions.push_back(DirectX::XMFLOAT3(x, y, z));
+		meshData.m_Normals.push_back(DirectX::XMFLOAT3(1, 1, 1));
 	}
 
-	meshData.m_Vertices.push_back(MeshData::Vertex(0, y, 0, 1, 1, 1));
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0, y, 0));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(1, 1, 1));
 
 	for (UINT slice = 0; slice < sliceCount; ++slice)
 	{
@@ -439,7 +479,7 @@ void GeometryGenerator::BuildBottomCap(MeshData& meshData, float bottomRadius, f
 	float theta			= 2.f * DirectX::XM_PI / sliceCount;
 	float y				= -height/2;
 
-	UINT indicex_index = meshData.GetVerticesNumber();
+	UINT indicex_index = meshData.m_Positions.size();
 
 	for (UINT slice = 0; slice < sliceCount; ++slice)
 	{
@@ -450,10 +490,12 @@ void GeometryGenerator::BuildBottomCap(MeshData& meshData, float bottomRadius, f
 		
 		float z = radius * sinf(theta * slice);
 
-		meshData.m_Vertices.push_back(MeshData::Vertex(x, y, z, 1, 1, 1));
+		meshData.m_Positions.push_back(DirectX::XMFLOAT3(x, y, z));
+		meshData.m_Normals.push_back(DirectX::XMFLOAT3(1, 1, 1));
 	}
 
-	meshData.m_Vertices.push_back(MeshData::Vertex(0, y, 0, 1, 1, 1));
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0, y, 0));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(1, 1, 1));
 
 	for (UINT slice = 0; slice < sliceCount; ++slice)
 	{
@@ -470,7 +512,7 @@ void GeometryGenerator::BuildStacks(MeshData& meshData, float bottomRadius, floa
 	float delta_height	= height/stackCount;
 	float height_half	= height/2.f;
 
-	UINT indicex_index	= meshData.GetVerticesNumber();
+	UINT indicex_index = meshData.m_Positions.size();
 	for (UINT stack = 0; stack < stackCount + 1; ++stack)
 	{
 		for (UINT slice = 0; slice < sliceCount; ++slice)
@@ -482,7 +524,8 @@ void GeometryGenerator::BuildStacks(MeshData& meshData, float bottomRadius, floa
 			float y = -height_half + stack * delta_height;
 			float z = radius * sinf(theta * slice);
 
-			meshData.m_Vertices.push_back(MeshData::Vertex(x, y, z, 1, 1, 1));
+			meshData.m_Positions.push_back(DirectX::XMFLOAT3(x, y, z));
+			meshData.m_Normals.push_back(DirectX::XMFLOAT3(1, 1, 1));
 		}
 	}
 
@@ -513,7 +556,7 @@ void GeometryGenerator::CreateGeosphere(MeshData& meshData, float radius, UINT n
 	// Approximate a sphere by tessellating an icosahedron.
 
 	meshData.m_Indices.clear();
-	meshData.m_Vertices.clear();
+	meshData.m_Positions.clear();
 
 	const float X = 0.525731f; 
 	const float Z = 0.850651f;
@@ -536,11 +579,14 @@ void GeometryGenerator::CreateGeosphere(MeshData& meshData, float radius, UINT n
 		10,1,6, 11,0,9, 2,11,9, 5,2,9,  11,2,7 
 	};
 
-	meshData.m_Vertices.resize(12);
+	meshData.m_Positions.resize(12);
+	meshData.m_Normals.resize(12);
+	meshData.m_TexCoords.resize(12);
+	meshData.m_Tangents.resize(12);
 	meshData.m_Indices.resize(60);
 
 	for (UINT i = 0; i < 12; ++i)
-		meshData.m_Vertices[i].Position = pos[i];
+		meshData.m_Positions[i] = pos[i];
 
 	for(UINT i = 0; i < 60; ++i)
 		meshData.m_Indices[i] = k[i];
@@ -549,78 +595,144 @@ void GeometryGenerator::CreateGeosphere(MeshData& meshData, float radius, UINT n
 		Subdivide(meshData);
 
 	// Project vertices onto sphere and scale.
-	for(UINT i = 0; i < meshData.m_Vertices.size(); ++i)
+	for (UINT i = 0; i < meshData.m_Positions.size(); ++i)
 	{
 		// Project onto unit sphere.
-		DirectX::XMVECTOR n = DirectX::XMVector3Normalize(DirectX::XMLoadFloat3(&meshData.m_Vertices[i].Position));
+		DirectX::XMVECTOR n = DirectX::XMVector3Normalize(DirectX::XMLoadFloat3(&meshData.m_Positions[i]));
 	
 		// Project onto sphere.
 		DirectX::XMVECTOR p = DirectX::operator*(n,radius);
-		DirectX::XMStoreFloat3(&meshData.m_Vertices[i].Position, p);
-		DirectX::XMStoreFloat3(&meshData.m_Vertices[i].Normal, n);
+		DirectX::XMStoreFloat3(&meshData.m_Positions[i], p);
+		DirectX::XMStoreFloat3(&meshData.m_Normals[i], n);
 
 		// Derive texture coordinates from spherical coordinates.
 		float theta = MathHelper::AngleFromXY(
-			meshData.m_Vertices[i].Position.x,
-			meshData.m_Vertices[i].Position.z);
+			meshData.m_Positions[i].x,
+			meshData.m_Positions[i].z);
 
-		float phi = acosf(meshData.m_Vertices[i].Position.y / radius);
+		float phi = acosf(meshData.m_Positions[i].y / radius);
 
-		meshData.m_Vertices[i].TexCoord.x = theta / DirectX::XM_2PI;
-		meshData.m_Vertices[i].TexCoord.y = phi / DirectX::XM_PI;
+		meshData.m_TexCoords[i].x = theta / DirectX::XM_2PI;
+		meshData.m_TexCoords[i].y = phi / DirectX::XM_PI;
 
 		// Partial derivative of P with respect to theta
-		meshData.m_Vertices[i].Tangent.x = -radius*sinf(phi)*sinf(theta);
-		meshData.m_Vertices[i].Tangent.y = 0.0f;
-		meshData.m_Vertices[i].Tangent.z = +radius*sinf(phi)*cosf(theta);
+		meshData.m_Tangents[i].x = -radius*sinf(phi)*sinf(theta);
+		meshData.m_Tangents[i].y = 0.0f;
+		meshData.m_Tangents[i].z = +radius*sinf(phi)*cosf(theta);
 
-		DirectX::XMVECTOR T = DirectX::XMLoadFloat3(&meshData.m_Vertices[i].Tangent);
-		DirectX::XMStoreFloat3(&meshData.m_Vertices[i].Tangent, DirectX::XMVector3Normalize(T));
+		DirectX::XMVECTOR T = DirectX::XMLoadFloat3(&meshData.m_Tangents[i]);
+		DirectX::XMStoreFloat3(&meshData.m_Tangents[i], DirectX::XMVector3Normalize(T));
 	}
 }
 
 void GeometryGenerator::CreateBox(MeshData& meshData) const
 {
-	meshData.m_Vertices.clear();
+	meshData.m_Positions.clear();
 	meshData.m_Indices.clear();
-	
-	//Front
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(-0.5f, -0.5f, -0.5f), DirectX::XMFLOAT3( 0.f, -0.0f, -1.0f), DirectX::XMFLOAT2(0.f, 1.0f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(-0.5f,  0.5f, -0.5f), DirectX::XMFLOAT3( 0.f, -0.0f, -1.0f), DirectX::XMFLOAT2(0.f, 0.0f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3( 0.5f,  0.5f, -0.5f), DirectX::XMFLOAT3( 0.f, -0.0f, -1.0f), DirectX::XMFLOAT2(1.f, 0.0f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3( 0.5f, -0.5f, -0.5f), DirectX::XMFLOAT3( 0.f, -0.0f, -1.0f), DirectX::XMFLOAT2(1.f, 1.0f)));
+	meshData.m_TexCoords.clear();
 
+
+	//Front
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(-0.5f, -0.5f, -0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.f, -0.0f, -1.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(0.f, 1.0f));
+	
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(-0.5f, 0.5f, -0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.f, -0.0f, -1.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(0.f, 0.0f));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0.5f, 0.5f, -0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.f, -0.0f, -1.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(1.f, 0.0f));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0.5f, -0.5f, -0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.f, -0.0f, -1.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(1.f, 1.0f));
 
 	//Back
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(-0.5f, -0.5f,  0.5f), DirectX::XMFLOAT3( 0.f, -0.0f,  1.0f), DirectX::XMFLOAT2(1.f, 1.0f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(-0.5f,  0.5f,  0.5f), DirectX::XMFLOAT3( 0.f, -0.0f,  1.0f), DirectX::XMFLOAT2(1.f, 0.0f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3( 0.5f,  0.5f,  0.5f), DirectX::XMFLOAT3( 0.f, -0.0f,  1.0f), DirectX::XMFLOAT2(0.f, 0.0f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3( 0.5f, -0.5f,  0.5f), DirectX::XMFLOAT3( 0.f, -0.0f,  1.0f), DirectX::XMFLOAT2(0.f, 1.0f)));
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(-0.5f, -0.5f, 0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.f, -0.0f, 1.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(1.f, 1.0f));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(-0.5f, 0.5f, 0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.f, -0.0f, 1.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(1.f, 0.0f));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0.5f, 0.5f, 0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.f, -0.0f, 1.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(0.f, 0.0f));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0.5f, -0.5f, 0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.f, -0.0f, 1.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(0.f, 1.0f));
 
 	// Left
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(-0.5f, -0.5f, -0.5f), DirectX::XMFLOAT3(-1.f, -0.0f,  0.0f), DirectX::XMFLOAT2(1.f, 1.0f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(-0.5f,  0.5f, -0.5f), DirectX::XMFLOAT3(-1.f, -0.0f,  0.0f), DirectX::XMFLOAT2(1.f, 0.0f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(-0.5f,  0.5f,  0.5f), DirectX::XMFLOAT3(-1.f, -0.0f, 0.0f),  DirectX::XMFLOAT2(0.f, 0.0f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(-0.5f, -0.5f,  0.5f), DirectX::XMFLOAT3(-1.f, -0.0f,  0.0f), DirectX::XMFLOAT2(0.f, 1.0f)));
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(-0.5f, -0.5f, -0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(-1.f, -0.0f, 0.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(1.f, 1.0f));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(-0.5f, 0.5f, -0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(-1.f, -0.0f, 0.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(1.f, 0.0f));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(-0.5f, 0.5f, 0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(-1.f, -0.0f, 0.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(0.f, 0.0f));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(-0.5f, -0.5f, 0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(-1.f, -0.0f, 0.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(0.f, 1.0f));
 
 	// Right
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3( 0.5f, -0.5f, -0.5f), DirectX::XMFLOAT3( 1.f, -0.0f, 0.0f), DirectX::XMFLOAT2(0.f, 1.0f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3( 0.5f,  0.5f, -0.5f), DirectX::XMFLOAT3( 1.f, -0.0f, 0.0f), DirectX::XMFLOAT2(0.f, 0.0f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3( 0.5f,  0.5f,  0.5f), DirectX::XMFLOAT3( 1.f, -0.0f, 0.0f), DirectX::XMFLOAT2(1.f, 0.0f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3( 0.5f, -0.5f,  0.5f), DirectX::XMFLOAT3( 1.f, -0.0f, 0.0f), DirectX::XMFLOAT2(1.f, 1.0f)));
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0.5f, -0.5f, -0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(1.f, -0.0f, 0.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(0.f, 1.0f));
 
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0.5f, 0.5f, -0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(1.f, -0.0f, 0.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(0.f, 0.0f));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0.5f, 0.5f, 0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(1.f, -0.0f, 0.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(1.f, 0.0f));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0.5f, -0.5f, 0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(1.f, -0.0f, 0.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(1.f, 1.0f));
 
 	// Top
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(-0.5f,  0.5f, -0.5f), DirectX::XMFLOAT3( 0.f,  1.0f, 0.0f), DirectX::XMFLOAT2(0.f, 1.0f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(-0.5f,  0.5f,  0.5f), DirectX::XMFLOAT3( 0.f,  1.0f, 0.0f), DirectX::XMFLOAT2(0.f, 0.0f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3( 0.5f,  0.5f,  0.5f), DirectX::XMFLOAT3( 0.f,  1.0f, 0.0f), DirectX::XMFLOAT2(1.f, 0.0f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3( 0.5f,  0.5f, -0.5f), DirectX::XMFLOAT3( 0.f,  1.0f, 0.0f), DirectX::XMFLOAT2(1.f, 1.0f)));
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(-0.5f, 0.5f, -0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.f, 1.0f, 0.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(0.f, 1.0f));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(-0.5f, 0.5f, 0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.f, 1.0f, 0.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(0.f, 0.0f));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0.5f, 0.5f, 0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.f, 1.0f, 0.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(1.f, 0.0f));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0.5f, 0.5f, -0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.f, 1.0f, 0.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(1.f, 1.0f));
 
 	// Bottom
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(-0.5f, -0.5f, -0.5f), DirectX::XMFLOAT3(0.f, -1.0f, 0.0f), DirectX::XMFLOAT2(0.f, 0.0f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(-0.5f, -0.5f,  0.5f), DirectX::XMFLOAT3(0.f, -1.0f, 0.0f), DirectX::XMFLOAT2(0.f, 1.0f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3( 0.5f, -0.5f,  0.5f), DirectX::XMFLOAT3(0.f, -1.0f, 0.0f), DirectX::XMFLOAT2(1.f, 1.0f)));
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3( 0.5f, -0.5f, -0.5f), DirectX::XMFLOAT3(0.f, -1.0f, 0.0f), DirectX::XMFLOAT2(1.f, 0.0f)));
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(-0.5f, -0.5f, -0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.f, -1.0f, 0.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(0.f, 0.0f));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(-0.5f, -0.5f, 0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.f, -1.0f, 0.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(0.f, 1.0f));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0.5f, -0.5f, 0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.f, -1.0f, 0.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(1.f, 1.0f));
+
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(0.5f, -0.5f, -0.5f));
+	meshData.m_Normals.push_back(DirectX::XMFLOAT3(0.f, -1.0f, 0.0f));
+	meshData.m_TexCoords.push_back(DirectX::XMFLOAT2(1.f, 0.0f));
 
 	meshData.m_Indices.push_back(2);
 	meshData.m_Indices.push_back(3);
@@ -676,7 +788,9 @@ void GeometryGenerator::CreateBox(MeshData& meshData) const
 void GeometryGenerator::CreateFromFile(MeshData& meshData, const std::string& file_name) const
 {
 	meshData.m_Indices.clear();
-	meshData.m_Vertices.clear();
+	meshData.m_Positions.clear();
+	meshData.m_Normals.clear();
+	meshData.m_TexCoords.clear();
 
 	std::ifstream file(file_name.c_str());
 
@@ -694,26 +808,37 @@ void GeometryGenerator::CreateFromFile(MeshData& meshData, const std::string& fi
 	file >> ignore >> tcount;
 	file >> ignore >> ignore >> ignore >> ignore;
 
-	meshData.m_Vertices.resize(vcount);
+	meshData.m_Positions.resize(vcount);
+	meshData.m_Normals.resize(vcount);
+	//meshData.m_TexCoords.resize(vcount);
 
 	float m = 0;
 	for (UINT i = 0; i < vcount; ++i)
 	{
 		
-		file >> meshData.m_Vertices[i];
+		file >> meshData.m_Positions[i].x;
+		file >> meshData.m_Positions[i].y;
+		file >> meshData.m_Positions[i].z;
 
-		m = max(m, abs(meshData.m_Vertices[i].Position.x));
-		m = max(m, abs(meshData.m_Vertices[i].Position.y));
-		m = max(m, abs(meshData.m_Vertices[i].Position.z));
+		file >> meshData.m_Normals[i].x;
+		file >> meshData.m_Normals[i].y;
+		file >> meshData.m_Normals[i].z;
+
+		//file >> meshData.m_TexCoords[i].x;
+		//file >> meshData.m_TexCoords[i].y;
+
+		m = max(m, abs(meshData.m_Positions[i].x));
+		m = max(m, abs(meshData.m_Positions[i].y));
+		m = max(m, abs(meshData.m_Positions[i].z));
 	}
 
 	if ( m > 1.f)
 	{
-		for (UINT i = 0 ; i < meshData.m_Vertices.size(); ++i)
+		for (UINT i = 0; i < meshData.m_Positions.size(); ++i)
 		{
-			meshData.m_Vertices[i].Position.x /= m; 
-			meshData.m_Vertices[i].Position.y /= m; 
-			meshData.m_Vertices[i].Position.z /= m; 
+			meshData.m_Positions[i].x /= m;
+			meshData.m_Positions[i].y /= m;
+			meshData.m_Positions[i].z /= m;
 		}
 	}
 
@@ -732,7 +857,7 @@ void GeometryGenerator::CreateFromFile(MeshData& meshData, const std::string& fi
 void GeometryGenerator::CreateFromHightMap(MeshData& meshData, const Highmap* highmap) const
 {
 	meshData.m_Indices.clear();
-	meshData.m_Vertices.clear();
+	meshData.m_Positions.clear();
 
 	UINT m = highmap->GetWidth();
 	UINT n = highmap->GetHeight();
@@ -751,8 +876,10 @@ void GeometryGenerator::CreateFromHightMap(MeshData& meshData, const Highmap* hi
 	float dz = depth / (m - 1);
 	float du = 1.0f / (n - 1);
 	float dv = 1.0f / (m - 1);
-	meshData.m_Vertices.resize(vertexCount);
-
+	meshData.m_Positions.resize(vertexCount);
+	meshData.m_Normals.resize(vertexCount);
+	meshData.m_TexCoords.resize(vertexCount);
+	meshData.m_Tangents.resize(vertexCount);
 
 	std::vector<face> faces;
 
@@ -764,7 +891,7 @@ void GeometryGenerator::CreateFromHightMap(MeshData& meshData, const Highmap* hi
 		for (UINT j = 0; j < n; ++j)
 		{
 			float x = -halfWidth + j*dx;
-			meshData.m_Vertices[i*n + j].Position = DirectX::XMFLOAT3(x, highmap->GetValue(i, j) * 40, z);
+			meshData.m_Positions[i*n + j] = DirectX::XMFLOAT3(x, highmap->GetValue(i, j) * 40, z);
 			// Ignore for now, used for lighting.
 
 			//Highmap::HeightMapType no = highmap->GetNormal(i, j);
@@ -783,10 +910,10 @@ void GeometryGenerator::CreateFromHightMap(MeshData& meshData, const Highmap* hi
 
 
 			//meshData.m_Vertices[i*n + j].Normal = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);
-			meshData.m_Vertices[i*n + j].Tangent = DirectX::XMFLOAT3(1.0f, 0.0f, 0.0f);
+			meshData.m_Tangents[i*n + j] = DirectX::XMFLOAT3(1.0f, 0.0f, 0.0f);
 			// Ignore for now, used for texturing.
-			meshData.m_Vertices[i*n + j].TexCoord.x = j*du;
-			meshData.m_Vertices[i*n + j].TexCoord.y = i*dv;
+			meshData.m_TexCoords[i*n + j].x = j*du;
+			meshData.m_TexCoords[i*n + j].y = i*dv;
 		}
 	}
 
@@ -808,9 +935,9 @@ void GeometryGenerator::CreateFromHightMap(MeshData& meshData, const Highmap* hi
 
 
 
-			DirectX::XMVECTOR p0 = DirectX::XMLoadFloat3(&meshData.m_Vertices[faces[k / 3].i1].Position);
-			DirectX::XMVECTOR p1 = DirectX::XMLoadFloat3(&meshData.m_Vertices[faces[k / 3].i2].Position);
-			DirectX::XMVECTOR p2 = DirectX::XMLoadFloat3(&meshData.m_Vertices[faces[k / 3].i3].Position);
+			DirectX::XMVECTOR p0 = DirectX::XMLoadFloat3(&meshData.m_Positions[faces[k / 3].i1]);
+			DirectX::XMVECTOR p1 = DirectX::XMLoadFloat3(&meshData.m_Positions[faces[k / 3].i2]);
+			DirectX::XMVECTOR p2 = DirectX::XMLoadFloat3(&meshData.m_Positions[faces[k / 3].i3]);
 
 			DirectX::XMVECTOR v0 = DirectX::XMVectorSubtract(p0, p1);
 			DirectX::XMVECTOR v1 = DirectX::XMVectorSubtract(p1, p2);
@@ -828,9 +955,9 @@ void GeometryGenerator::CreateFromHightMap(MeshData& meshData, const Highmap* hi
 			faces[(k + 3) / 3].i3 = (i + 1)*n + j + 1;
 
 
-			p0 = DirectX::XMLoadFloat3(&meshData.m_Vertices[faces[(k + 3) / 3].i1].Position);
-			p1 = DirectX::XMLoadFloat3(&meshData.m_Vertices[faces[(k + 3) / 3].i2].Position);
-			p2 = DirectX::XMLoadFloat3(&meshData.m_Vertices[faces[(k + 3) / 3].i3].Position);
+			p0 = DirectX::XMLoadFloat3(&meshData.m_Positions[faces[(k + 3) / 3].i1]);
+			p1 = DirectX::XMLoadFloat3(&meshData.m_Positions[faces[(k + 3) / 3].i2]);
+			p2 = DirectX::XMLoadFloat3(&meshData.m_Positions[faces[(k + 3) / 3].i3]);
 			
 			v0 = DirectX::XMVectorSubtract(p0, p1);
 			v1 = DirectX::XMVectorSubtract(p1, p2);
@@ -897,14 +1024,14 @@ void GeometryGenerator::CreateFromHightMap(MeshData& meshData, const Highmap* hi
 			}
 
 
-			ComputeNormals(meshData.m_Vertices[vertex_index], neightboors);
+			ComputeNormals(meshData, neightboors, vertex_index);
 		}
 	}
 }
 
 void GeometryGenerator::CreateBillboard(MeshData& meshData) const
 {
-	meshData.m_Vertices.push_back(MeshData::Vertex(DirectX::XMFLOAT3(-0.0f, -0.0f, 0.0f), DirectX::XMFLOAT2(1.f, 1.f)));
-
+	meshData.m_Positions.push_back(DirectX::XMFLOAT3(-0.0f, -0.0f, 0.0f));
+	meshData.m_Sizes.push_back(DirectX::XMFLOAT2(1.f, 1.f));
 	meshData.m_Indices.push_back(0);
 }

@@ -5,30 +5,30 @@
 
 #include "GraphicsCommon.h"
 #include "RenderState.h"
-class BaseEffect;
+class Effect;
 class ITexture;
 
 struct ID3D11Device;
 struct ID3DX11EffectTechnique;
-class IMaterial
-{
-	virtual bool LoadContent(ID3D11Device* device) = 0;
-	virtual bool UnloadContent(ID3D11Device* device) = 0;
-	virtual void Update(float delta) = 0;
-	virtual ID3DX11EffectTechnique* GetTechnique() = 0;
+struct ID3D11Buffer;
 
-};
+class MeshData;
 
-class Material : public IMaterial
+class Material 
 {
 
 public:
 	Material();
 	~Material();
 
-	virtual bool LoadContent(ID3D11Device* device) override;
-	virtual bool UnloadContent(ID3D11Device* device) override;
-	virtual void Update(float delta)  override;
+	virtual void Initialize(ID3D11Device* device);
+	virtual bool LoadContent(ID3D11Device* device);
+	virtual bool UnloadContent(ID3D11Device* device);
+	virtual void Update(float delta);
+
+
+	virtual void CreateVertexBuffer(ID3D11Device* device, const MeshData* mesh, ID3D11Buffer** vertexBuffer) const = 0;
+	virtual UINT VertexSize() const = 0;
 
 	ID3DX11EffectTechnique* GetTechnique();
 
@@ -40,7 +40,7 @@ public:
 	EffectType					m_EffectType;
 
 	std::shared_ptr<ITexture>   m_DiffuseMap;
-	std::shared_ptr<BaseEffect> m_Effect;
+	std::shared_ptr<Effect>		m_Effect;
 
 };
 

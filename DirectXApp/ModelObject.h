@@ -102,9 +102,7 @@ protected:
 	std::shared_ptr<MeshData>	m_Data;
 	std::shared_ptr<Material>	m_Material;
 public:
-	UINT						m_IndicesNumber;
-	UINT						m_IndicesOffset;
-	UINT						m_VerticesOffset;
+
 
 	bool						m_CastShadow;
 };

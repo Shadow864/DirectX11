@@ -33,7 +33,7 @@ public:
 	std::shared_ptr<Material> Shadow;
 	std::shared_ptr<Material> Mirror;
 
-	std::shared_ptr<Material> Billboard;
+	std::shared_ptr<Material> Tree;
 	//MaterialVec	m_Material;
 };
 

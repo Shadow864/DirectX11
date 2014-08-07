@@ -196,3 +196,16 @@ void BaseEffect::Apply(std::shared_ptr<Material> material)
 		SetDiffuseMap(material->m_DiffuseMap->GetResource());
 	}
 }
+
+ID3DX11EffectTechnique* BaseEffect::GetTechnique(const std::string& name)
+{
+	return m_TechLightTexture;
+}
+
+ID3DX11EffectTechnique* BaseEffect::GetTechnique(int index)
+{
+	if (index == 0)
+		return m_TechLight;
+	else 
+		return m_TechLightTexture;
+}
