@@ -5,6 +5,7 @@
 #include "Texture.h"
 #include "BasicMaterial.h"
 #include "BillboardMaterial.h"
+#include "CylinderMaterial.h"
 
 MaterialManager::MaterialManager()
 {
@@ -20,7 +21,7 @@ MaterialManager::MaterialManager()
 	Water = std::make_shared<BasicMaterial>();
 	Water->m_RenderState.BlendMode.Set(BlendMode::TRANSPARENT, Scope::MATERIAL);
 	Water->m_DiffuseMap		= water_texture;
-	Water->m_Diffuse.w		= 0.2f;
+	Water->m_Diffuse.w		= 0.4f;
 
 	///////////////////// Terrain ///////////////////
 	std::shared_ptr<ITexture> terrain_texture = std::make_shared<Texture>(L"Textures/grass.dds");
@@ -28,8 +29,9 @@ MaterialManager::MaterialManager()
 
 	Terrain = std::make_shared<BasicMaterial>();
 	Terrain->m_DiffuseMap	= terrain_texture;
+	Terrain->m_Specular.w = 0;
 
-	///////////////////// Terrain ///////////////////
+	///////////////////// Fire ///////////////////
 	std::shared_ptr<ITexture> fire_texture = std::make_shared<AnimateTexture>(L"Textures/FireAnim/Fire", 120);
 
 	Fire = std::make_shared<BasicMaterial>();
@@ -71,6 +73,7 @@ MaterialManager::MaterialManager()
 	Mirror = std::make_shared<BasicMaterial>();
 	Mirror->m_RenderState.BlendMode.Set(BlendMode::TRANSPARENT, Scope::MATERIAL);
 	Mirror->m_Diffuse.w = 0.35;
+	Mirror->m_Specular = DirectX::XMFLOAT4(0.4f, 0.4f, 0.4f, 100);
 	Mirror->m_DiffuseMap = mirror_texture;
 
 	Shadow = std::make_shared<BasicMaterial>();
@@ -110,6 +113,9 @@ MaterialManager::MaterialManager()
 	Tree->m_RenderState.CullMode.Set(CullFaceMode::NONE, Scope::MATERIAL);
 	Tree->m_RenderState.BlendMode.Set(BlendMode::TRANSPARENT, Scope::MATERIAL);
 	Tree->m_DiffuseMap = tree_texture;
+
+	Cylinder = std::make_shared<CylinderMaterial>();
+	Cylinder->m_EffectType = EffectType::CYLINDER;
 	
 	
 }

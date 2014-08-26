@@ -1035,3 +1035,23 @@ void GeometryGenerator::CreateBillboard(MeshData& meshData) const
 	meshData.m_Sizes.push_back(DirectX::XMFLOAT2(1.f, 1.f));
 	meshData.m_Indices.push_back(0);
 }
+
+void GeometryGenerator::CreateCircle(MeshData& meshData, float radius, float subdevisions) const
+{
+	float delta = DirectX::XM_2PI / subdevisions;
+
+	for (UINT i = 0; i < subdevisions; ++i)
+	{
+		
+		float angle = delta * i;
+
+		float x = radius * sinf(angle);
+		float y = 0;
+		float z = radius * cosf(angle);
+
+		meshData.m_Positions.push_back(DirectX::XMFLOAT3(x, y, z));
+		meshData.m_Indices.push_back(i);
+	}
+
+	meshData.m_Indices.push_back(0);
+}

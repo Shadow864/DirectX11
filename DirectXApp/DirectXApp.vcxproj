@@ -151,6 +151,7 @@
     <ClInclude Include="BasicMaterial.h" />
     <ClInclude Include="BillboardMaterial.h" />
     <ClInclude Include="ContentManager.h" />
+    <ClInclude Include="CylinderMaterial.h" />
     <ClInclude Include="DirectXApp.h" />
     <ClInclude Include="Effects\Effect.h" />
     <ClInclude Include="Effects\EffectsManager.h" />
@@ -177,6 +178,7 @@
     <ClCompile Include="BasicMaterial.cpp" />
     <ClCompile Include="BillboardMaterial.cpp" />
     <ClCompile Include="ContentManager.cpp" />
+    <ClCompile Include="CylinderMaterial.cpp" />
     <ClCompile Include="DirectXApp.cpp" />
     <ClCompile Include="Effects\Effect.cpp" />
     <ClCompile Include="Effects\EffectsManager.cpp" />

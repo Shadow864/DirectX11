@@ -7,9 +7,9 @@
 
 Material::Material()
 {
-	m_Ambient		= DirectX::XMFLOAT4(0.1f, 0.1f, 0.1f, 0);
-	m_Diffuse		= DirectX::XMFLOAT4(1, 1, 1, 1);
-	m_Specular		= DirectX::XMFLOAT4(0.1f, 0.1f, 0.1f, 1);
+	m_Ambient		= DirectX::XMFLOAT4(0.1f, 0.1f, 0.1f, 1.0f);
+	m_Diffuse		= DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	m_Specular		= DirectX::XMFLOAT4(0.0f, 0.0f, 0.0f, 0);
 	m_EffectType	= EffectType::BASIC;
 }
 

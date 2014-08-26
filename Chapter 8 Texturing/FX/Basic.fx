@@ -103,7 +103,18 @@ float4 PS(VertexOut pin, uniform bool gUseTexture, uniform bool gFogEnabled) : S
 	diffuse += D;
 	spec += S;
 
-	float4 litColor = texColor * (ambient + diffuse) + spec;
+	ambient.w = 1;
+	diffuse.w = 1;
+	spec.w = 1;
+
+	float4 spec2 = float4(spec.x, spec.y, spec.z, 0);
+
+	float4 sum = ambient;
+	sum += spec2;
+	sum += diffuse;
+
+	
+	float4 litColor = texColor * (sum);
 	
 	if (gFogEnabled)
 	{
@@ -113,7 +124,7 @@ float4 PS(VertexOut pin, uniform bool gUseTexture, uniform bool gFogEnabled) : S
 	}
 
 	// Common to take alpha from diffuse material.
-	litColor.a = gDiffuse.a * texColor.a;
+	litColor.a =  gDiffuse.a * texColor.a;
 	
 	//float depthValue = pin.PosH.z / pin.PosH.w;
 

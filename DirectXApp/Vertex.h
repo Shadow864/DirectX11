@@ -9,6 +9,10 @@ class MeshData;
 
 namespace Vertex
 {
+	struct Pos
+	{
+		DirectX::XMFLOAT3 Position;
+	};
 
 	struct PosSize
 	{
@@ -27,6 +31,7 @@ namespace Vertex
 class InputLayoutDesc
 {
 public:
+	static const D3D11_INPUT_ELEMENT_DESC Pos[1];
 	static const D3D11_INPUT_ELEMENT_DESC PosNormal[2];
 	static const D3D11_INPUT_ELEMENT_DESC PosSize[2];
 	static const D3D11_INPUT_ELEMENT_DESC PosNormalTexCoord[3];
@@ -41,6 +46,7 @@ public:
 	void Init(ID3D11Device* device, EffectsManager* effects);
 	void Release();
 
+	ID3D11InputLayout* Pos;
 	ID3D11InputLayout* PosNormal;
 	ID3D11InputLayout* PosSize;
 	ID3D11InputLayout* PosNormalTexCoord;
