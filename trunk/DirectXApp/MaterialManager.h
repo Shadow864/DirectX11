@@ -34,6 +34,8 @@ public:
 	std::shared_ptr<Material> Mirror;
 
 	std::shared_ptr<Material> Tree;
+
+	std::shared_ptr<Material> Cylinder;
 	//MaterialVec	m_Material;
 };
 

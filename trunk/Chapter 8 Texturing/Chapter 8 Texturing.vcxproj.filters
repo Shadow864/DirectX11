@@ -13,6 +13,9 @@
     <FxCompile Include="FX\Billboard.fx">
       <Filter>Resource Files\FX</Filter>
     </FxCompile>
+    <FxCompile Include="FX\Cylinder.fx">
+      <Filter>Resource Files\FX</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />

@@ -38,6 +38,7 @@ public:
 	void CreateFromFile				(MeshData& meshData, const std::string& file_name) const;
 	void CreateFromHightMap			(MeshData& meshData, const Highmap* highmap) const;
 	void CreateBillboard			(MeshData& meshDate) const;
+	void CreateCircle				(MeshData& meshData, float radius, float subdevisions) const;
 
 private:
 	void CreateSierpinskiTrinagle	(MeshData& meshData, UINT level, UINT max_level, DirectX::XMFLOAT3 pos, float scale) const;

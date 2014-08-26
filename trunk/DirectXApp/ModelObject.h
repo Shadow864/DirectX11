@@ -215,3 +215,10 @@ class Billboard : public ModelObject
 public:
 	Billboard();
 };
+
+
+class Circle : public ModelObject
+{
+public:
+	Circle();
+};

@@ -96,6 +96,9 @@
     <ClInclude Include="BillboardMaterial.h">
       <Filter>Header Files\Material</Filter>
     </ClInclude>
+    <ClInclude Include="CylinderMaterial.h">
+      <Filter>Header Files\Material</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -162,6 +165,9 @@
       <Filter>Source Files\Material</Filter>
     </ClCompile>
     <ClCompile Include="BillboardMaterial.cpp">
+      <Filter>Source Files\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="CylinderMaterial.cpp">
       <Filter>Source Files\Material</Filter>
     </ClCompile>
   </ItemGroup>

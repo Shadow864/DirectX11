@@ -9,6 +9,12 @@
 
 #pragma region InputLayoutDesc
 
+const D3D11_INPUT_ELEMENT_DESC InputLayoutDesc::Pos[1] =
+{
+
+	{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+};
+
 const D3D11_INPUT_ELEMENT_DESC InputLayoutDesc::PosNormal[2] =
 {
 	
@@ -38,7 +44,8 @@ const D3D11_INPUT_ELEMENT_DESC InputLayoutDesc::PosNormalTexCoord[3] =
 #pragma region InputLayoutsManager
 
 InputLayoutsManager::InputLayoutsManager()
-: PosNormal(nullptr)
+: Pos(nullptr)
+, PosNormal(nullptr)
 , PosSize(nullptr)
 , PosNormalTexCoord(nullptr)
 {
@@ -64,10 +71,17 @@ void InputLayoutsManager::Init(ID3D11Device* device, EffectsManager* effects)
 	effects->GetEffect(EffectType::BILLBOARD)->m_TechLight->GetPassByIndex(0)->GetDesc(&passDesc);
 	device->CreateInputLayout(InputLayoutDesc::PosSize, 2, passDesc.pIAInputSignature,
 		passDesc.IAInputSignatureSize, &PosSize);
+
+	effects->GetEffect(EffectType::CYLINDER)->m_TechLight->GetPassByIndex(0)->GetDesc(&passDesc);
+	device->CreateInputLayout(InputLayoutDesc::Pos, 1, passDesc.pIAInputSignature,
+		passDesc.IAInputSignatureSize, &Pos);
 }
 
 void InputLayoutsManager::Release()
 {
+	if (Pos)
+		Pos->Release();
+
 	if (PosNormal)
 		PosNormal->Release();
 

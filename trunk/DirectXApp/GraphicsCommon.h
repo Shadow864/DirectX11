@@ -53,6 +53,7 @@ enum class EffectType
 {
 	BASIC,
 	BILLBOARD,
+	CYLINDER,
 	COUNT
 };
 

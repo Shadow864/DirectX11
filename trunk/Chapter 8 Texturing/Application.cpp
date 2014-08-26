@@ -202,6 +202,11 @@ void Application::Render(
 		m_DeviceContextPtr->IASetInputLayout(m_InputLayoutsManager->PosSize);
 		m_DeviceContextPtr->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
 	}
+	else if (material->m_EffectType == EffectType::CYLINDER)
+	{
+		m_DeviceContextPtr->IASetInputLayout(m_InputLayoutsManager->Pos);
+		m_DeviceContextPtr->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
+	}
 	else
 	{
 		m_DeviceContextPtr->IASetInputLayout(m_InputLayoutsManager->PosNormalTexCoord);
@@ -415,9 +420,14 @@ void Application::CreateObject(UINT id)
 
 	else if (id == 2)
 	{
-		ModelObject* traingle = new Triangle();
+
+		Circle* circle = new Circle();
+		circle->SetMaterial(ContentManager::GetInstance().m_MaterialManager->Cylinder);
+		m_ModelObjects.push_back(circle);
+
+		/*ModelObject* traingle = new Triangle();
 		traingle->SetMaterial(ContentManager::GetInstance().m_MaterialManager->WoodenBox);
-		m_ModelObjects.push_back(traingle);
+		m_ModelObjects.push_back(traingle);*/
 	}
 	else if ( id == 3)
 		m_ModelObjects.push_back(new SierpinskiTriangle(2));
@@ -470,7 +480,9 @@ void Application::CreateObject(UINT id)
 		mirror->AddObject(Wall1);
 		m_ModelObjects.push_back(mirror);
 
-
+		Circle* circle = new Circle();
+		circle->SetMaterial(ContentManager::GetInstance().m_MaterialManager->Cylinder);
+		m_ModelObjects.push_back(circle);
 
 		for (INT i = 0; i <= 10; ++i)
 		{

@@ -293,3 +293,11 @@ Billboard::Billboard()
 
 	gen.CreateBillboard(*m_Data);
 }
+
+
+Circle::Circle()
+{
+	GeometryGenerator gen;
+
+	gen.CreateCircle(*m_Data, 0.5f, 12);
+}
