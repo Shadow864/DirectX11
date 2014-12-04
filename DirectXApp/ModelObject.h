@@ -222,3 +222,9 @@ class Circle : public ModelObject
 public:
 	Circle();
 };
+
+class Point : public ModelObject
+{
+public:
+	Point();
+};

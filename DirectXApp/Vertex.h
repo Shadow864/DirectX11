@@ -2,7 +2,7 @@
 #include <DirectXMath.h>
 #include <d3d11.h>
 
-
+#include "GraphicsCommon.h"
 struct ID3DX11EffectTechnique;
 class EffectsManager;
 class MeshData;
@@ -18,6 +18,12 @@ namespace Vertex
 	{
 		DirectX::XMFLOAT3 Pos;
 		DirectX::XMFLOAT2 Size;
+	};
+
+	struct PosNormal
+	{
+		DirectX::XMFLOAT3 Pos;
+		DirectX::XMFLOAT3 Normal;
 	};
 
 	struct PosNormalTexCoord
@@ -46,9 +52,13 @@ public:
 	void Init(ID3D11Device* device, EffectsManager* effects);
 	void Release();
 
-	ID3D11InputLayout* Pos;
-	ID3D11InputLayout* PosNormal;
-	ID3D11InputLayout* PosSize;
-	ID3D11InputLayout* PosNormalTexCoord;
+
+
+	ID3D11InputLayout* GetInputLayout(VertexType type) const;
+
+	D3D_PRIMITIVE_TOPOLOGY GetTopology(TopologyType type) const;
+private:
+	ID3D11InputLayout* m_InputLayouts[(int)VertexType::COUNT];
+
 };
 

@@ -4,6 +4,8 @@
 
 CylinderMaterial::CylinderMaterial()
 {
+	m_VertexType	 = VertexType::POS_NORMAL;
+	m_TopologyType	= TopologyType::LINE_STRIP;
 }
 
 

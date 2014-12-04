@@ -37,7 +37,7 @@ public:
 	void CreateBox					(MeshData& meshData) const;
 	void CreateFromFile				(MeshData& meshData, const std::string& file_name) const;
 	void CreateFromHightMap			(MeshData& meshData, const Highmap* highmap) const;
-	void CreateBillboard			(MeshData& meshDate) const;
+	void CreatePointWithSize		(MeshData& meshDate) const;
 	void CreateCircle				(MeshData& meshData, float radius, float subdevisions) const;
 
 private:

@@ -6,6 +6,7 @@
 #include "BasicMaterial.h"
 #include "BillboardMaterial.h"
 #include "CylinderMaterial.h"
+#include "SphereMaterial.h"
 
 MaterialManager::MaterialManager()
 {
@@ -38,7 +39,7 @@ MaterialManager::MaterialManager()
 	Fire->m_DiffuseMap		= fire_texture;
 
 
-	///////////////////// Terrain ///////////////////
+	///////////////////// Bolt ///////////////////
 	std::shared_ptr<ITexture> bolt_texture = std::make_shared<AnimateTexture>(L"Textures/BoltAnim/Bolt", 3);
 
 	Bolt = std::make_shared<BasicMaterial>();
@@ -60,7 +61,7 @@ MaterialManager::MaterialManager()
 	WireFence->m_RenderState.BlendMode.Set(BlendMode::ALPHA_TO_COVERAGE, Scope::MATERIAL);
 	WireFence->m_DiffuseMap		= wirefence_texture;
 
-
+	///////////////////// BrickFloor ///////////////////
 	std::shared_ptr<ITexture> brick_texture = std::make_shared<Texture>(L"Textures/darkbrickdxt1.dds");
 	brick_texture->SetScale(10, 10);
 
@@ -68,6 +69,7 @@ MaterialManager::MaterialManager()
 	BrickFloor->m_RenderState.CullMode.Set(CullFaceMode::FRONT, Scope::MATERIAL);
 	BrickFloor->m_DiffuseMap = brick_texture;
 	
+	///////////////////// Mirror ///////////////////
 	std::shared_ptr<ITexture> mirror_texture = std::make_shared<Texture>(L"Textures/ice.dds");
 
 	Mirror = std::make_shared<BasicMaterial>();
@@ -76,6 +78,7 @@ MaterialManager::MaterialManager()
 	Mirror->m_Specular = DirectX::XMFLOAT4(0.4f, 0.4f, 0.4f, 100);
 	Mirror->m_DiffuseMap = mirror_texture;
 
+	///////////////////// Shadow ///////////////////
 	Shadow = std::make_shared<BasicMaterial>();
 	Shadow->m_RenderState.BlendMode.Set(BlendMode::TRANSPARENT, Scope::MATERIAL);
 	Shadow->m_RenderState.DepthStencilMode.Set(DepthStencilMode::SHADOW, Scope::MATERIAL);
@@ -116,7 +119,11 @@ MaterialManager::MaterialManager()
 
 	Cylinder = std::make_shared<CylinderMaterial>();
 	Cylinder->m_EffectType = EffectType::CYLINDER;
-	
+	Cylinder->m_DiffuseMap = fire_texture;
+
+	Sphere = std::make_shared<SphereMaterial>();
+	Sphere->m_EffectType = EffectType::SPHERE;
+	Sphere->m_DiffuseMap = fire_texture;
 	
 }
 

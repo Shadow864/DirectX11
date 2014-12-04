@@ -18,6 +18,7 @@ bool EffectsManager::Init(ID3D11Device* device)
 	m_Effects[(int)EffectType::BASIC]		= std::make_shared<BaseEffect>(device, L"FX/Basic.fxo");
 	m_Effects[(int)EffectType::BILLBOARD]	= std::make_shared<BaseEffect>(device, L"FX/Billboard.fxo");
 	m_Effects[(int)EffectType::CYLINDER]	= std::make_shared<BaseEffect>(device, L"FX/Cylinder.fxo");
+	m_Effects[(int)EffectType::SPHERE]		= std::make_shared<BaseEffect>(device, L"FX/Sphere.fxo");
 	return true;
 }
 void EffectsManager::Release()

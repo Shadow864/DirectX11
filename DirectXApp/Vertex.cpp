@@ -44,12 +44,8 @@ const D3D11_INPUT_ELEMENT_DESC InputLayoutDesc::PosNormalTexCoord[3] =
 #pragma region InputLayoutsManager
 
 InputLayoutsManager::InputLayoutsManager()
-: Pos(nullptr)
-, PosNormal(nullptr)
-, PosSize(nullptr)
-, PosNormalTexCoord(nullptr)
 {
-
+	memset(m_InputLayouts, 0, sizeof(m_InputLayouts));
 }
 
 InputLayoutsManager::~InputLayoutsManager()
@@ -66,35 +62,43 @@ void InputLayoutsManager::Init(ID3D11Device* device, EffectsManager* effects)
 
 	effects->GetEffect(EffectType::BASIC)->m_TechLight->GetPassByIndex(0)->GetDesc(&passDesc);
 	device->CreateInputLayout(InputLayoutDesc::PosNormalTexCoord, 3, passDesc.pIAInputSignature,
-		passDesc.IAInputSignatureSize, &PosNormalTexCoord);
+		passDesc.IAInputSignatureSize, &m_InputLayouts[(int)VertexType::POS_NORMAL_TEXCOORD]);
 
 	effects->GetEffect(EffectType::BILLBOARD)->m_TechLight->GetPassByIndex(0)->GetDesc(&passDesc);
 	device->CreateInputLayout(InputLayoutDesc::PosSize, 2, passDesc.pIAInputSignature,
-		passDesc.IAInputSignatureSize, &PosSize);
+		passDesc.IAInputSignatureSize, &m_InputLayouts[(int)VertexType::POS_SIZE]);
 
 	effects->GetEffect(EffectType::CYLINDER)->m_TechLight->GetPassByIndex(0)->GetDesc(&passDesc);
-	device->CreateInputLayout(InputLayoutDesc::Pos, 1, passDesc.pIAInputSignature,
-		passDesc.IAInputSignatureSize, &Pos);
+	device->CreateInputLayout(InputLayoutDesc::PosNormal, 2, passDesc.pIAInputSignature,
+		passDesc.IAInputSignatureSize, &m_InputLayouts[(int)VertexType::POS_NORMAL]);
+
 }
 
 void InputLayoutsManager::Release()
 {
-	if (Pos)
-		Pos->Release();
 
-	if (PosNormal)
-		PosNormal->Release();
-
-	if (PosSize)
-		PosSize->Release();
-
-	if (PosNormalTexCoord)
-		PosNormalTexCoord->Release();
-
-	PosNormal			= nullptr;
-	PosSize = nullptr;
-	PosNormalTexCoord	= nullptr;
-
+	for (auto layout : m_InputLayouts)
+	{
+		layout->Release();
+		layout = nullptr;
+	}
 }
 
+ID3D11InputLayout* InputLayoutsManager::GetInputLayout(VertexType type) const
+{
+	return m_InputLayouts[(int)type];
+}
+
+D3D_PRIMITIVE_TOPOLOGY InputLayoutsManager::GetTopology(TopologyType type) const
+{
+	switch (type)
+	{
+	case TopologyType::LINE_STRIP:
+		return D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP;
+	case TopologyType::POINT_LIST:
+		return D3D11_PRIMITIVE_TOPOLOGY_POINTLIST;
+	case TopologyType::TRIANGLE_LIST:
+		return D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+	}
+}
 #pragma endregion

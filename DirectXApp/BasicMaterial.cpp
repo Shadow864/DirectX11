@@ -4,6 +4,8 @@
 
 BasicMaterial::BasicMaterial()
 {
+	m_VertexType	= VertexType::POS_NORMAL_TEXCOORD;
+	m_TopologyType	= TopologyType::TRIANGLE_LIST;
 }
 
 

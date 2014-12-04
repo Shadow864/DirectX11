@@ -196,22 +196,9 @@ void Application::Render(
 
 	if (!effect)
 		return;
-
-	if (material->m_EffectType == EffectType::BILLBOARD)
-	{
-		m_DeviceContextPtr->IASetInputLayout(m_InputLayoutsManager->PosSize);
-		m_DeviceContextPtr->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
-	}
-	else if (material->m_EffectType == EffectType::CYLINDER)
-	{
-		m_DeviceContextPtr->IASetInputLayout(m_InputLayoutsManager->Pos);
-		m_DeviceContextPtr->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
-	}
-	else
-	{
-		m_DeviceContextPtr->IASetInputLayout(m_InputLayoutsManager->PosNormalTexCoord);
-		m_DeviceContextPtr->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	}
+	
+	m_DeviceContextPtr->IASetInputLayout(m_InputLayoutsManager->GetInputLayout(material->m_VertexType));
+	m_DeviceContextPtr->IASetPrimitiveTopology(m_InputLayoutsManager->GetTopology(material->m_TopologyType));
 
 	DirectX::FXMVECTOR fog_color = DirectX::XMVectorSet(0.4f, 0.4f, 0.4f, 1.0f);
 
@@ -316,7 +303,7 @@ void Application::RenderShadow(const ModelObject* object, DirectX::CXMMATRIX mat
 
 	DirectX::XMMATRIX shadow= DirectX::XMMatrixShadow(DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0), DirectX::XMVectorSet(0, 1, 0, 0));// m_Light.Direction);
 
-	Render(object, matrix *  shadow* DirectX::XMMatrixTranslation(0, -0.9, 0), ContentManager::GetInstance().m_MaterialManager->Shadow);
+	Render(object, matrix *  shadow* DirectX::XMMatrixTranslation(0, -0.999, 0), ContentManager::GetInstance().m_MaterialManager->Shadow);
 }
 
 void Application::OnMouseDown(WPARAM btnState, int x, int y)
@@ -420,10 +407,13 @@ void Application::CreateObject(UINT id)
 
 	else if (id == 2)
 	{
-
-		Circle* circle = new Circle();
+		/*Circle* circle = new Circle();
 		circle->SetMaterial(ContentManager::GetInstance().m_MaterialManager->Cylinder);
-		m_ModelObjects.push_back(circle);
+		m_ModelObjects.push_back(circle);*/
+
+		Triangle* point = new Triangle();
+		point->SetMaterial(ContentManager::GetInstance().m_MaterialManager->Sphere);
+		m_ModelObjects.push_back(point);
 
 		/*ModelObject* traingle = new Triangle();
 		traingle->SetMaterial(ContentManager::GetInstance().m_MaterialManager->WoodenBox);
@@ -437,7 +427,7 @@ void Application::CreateObject(UINT id)
 		m_ModelObjects.push_back(new Cylinder(1, 0.5, 1, 4, 2));
 	else if (id == 6)
 	{
-		ModelObject* geosphere = new Box();
+		ModelObject* geosphere = new Geosphere(1,2);
 		geosphere->SetMaterial(ContentManager::GetInstance().m_MaterialManager->Fire);
 		m_ModelObjects.push_back(geosphere);
 	}

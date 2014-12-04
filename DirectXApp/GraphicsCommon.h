@@ -54,14 +54,22 @@ enum class EffectType
 	BASIC,
 	BILLBOARD,
 	CYLINDER,
+	SPHERE,
 	COUNT
 };
 
 enum class VertexType
 {
-	PosNormal,
-	PosSize,
-	PosNormalTexCoord,
+	POS_NORMAL,
+	POS_SIZE,
+	POS_NORMAL_TEXCOORD,
+	COUNT
+};
 
+enum class TopologyType
+{
+	POINT_LIST,
+	LINE_STRIP,
+	TRIANGLE_LIST,
 };
 
