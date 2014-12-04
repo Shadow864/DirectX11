@@ -291,7 +291,7 @@ Billboard::Billboard()
 {
 	GeometryGenerator gen;
 
-	gen.CreateBillboard(*m_Data);
+	gen.CreatePointWithSize(*m_Data);
 }
 
 
@@ -300,4 +300,13 @@ Circle::Circle()
 	GeometryGenerator gen;
 
 	gen.CreateCircle(*m_Data, 0.5f, 12);
+}
+
+
+
+Point::Point()
+{
+	GeometryGenerator gen;
+
+	gen.CreatePointWithSize(*m_Data);
 }

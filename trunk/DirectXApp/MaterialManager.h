@@ -36,6 +36,7 @@ public:
 	std::shared_ptr<Material> Tree;
 
 	std::shared_ptr<Material> Cylinder;
+	std::shared_ptr<Material> Sphere;
 	//MaterialVec	m_Material;
 };
 

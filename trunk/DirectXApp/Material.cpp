@@ -11,6 +11,8 @@ Material::Material()
 	m_Diffuse		= DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	m_Specular		= DirectX::XMFLOAT4(0.0f, 0.0f, 0.0f, 0);
 	m_EffectType	= EffectType::BASIC;
+	m_TopologyType	= TopologyType::TRIANGLE_LIST;
+	m_VertexType	= VertexType::POS_NORMAL_TEXCOORD;
 }
 
 

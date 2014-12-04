@@ -18,7 +18,7 @@ GeometryGenerator::~GeometryGenerator(void)
 void GeometryGenerator::Subdivide(MeshData& meshData) const
 {
 	// Save a copy of the input geometry.
-	MeshData inputCopy = meshData;
+	const MeshData inputCopy = meshData;
 
 
 	meshData.m_Positions.resize(0);
@@ -34,64 +34,76 @@ void GeometryGenerator::Subdivide(MeshData& meshData) const
 	// *-----*-----*
 	// v0    m2     v2
 
-	//UINT numTris = inputCopy.m_Indices.size()/3;
-	//for(UINT i = 0; i < numTris; ++i)
-	//{
-	//	MeshData::Vertex v0 = inputCopy.m_Vertices[inputCopy.m_Indices[i * 3 + 0]];
-	//	MeshData::Vertex v1 = inputCopy.m_Vertices[inputCopy.m_Indices[i * 3 + 1]];
-	//	MeshData::Vertex v2 = inputCopy.m_Vertices[inputCopy.m_Indices[i * 3 + 2]];
+	UINT numTris = inputCopy.m_Indices.size()/3;
+	for(UINT i = 0; i < numTris; ++i)
+	{
+		
+		DirectX::XMFLOAT3 back_v0 = inputCopy.m_Positions[inputCopy.m_Indices[i * 3 + 0]];
+		DirectX::XMFLOAT3 back_v1 = inputCopy.m_Positions[inputCopy.m_Indices[i * 3 + 1]];
+		DirectX::XMFLOAT3 back_v2 = inputCopy.m_Positions[inputCopy.m_Indices[i * 3 + 2]];
+		
+		DirectX::CXMVECTOR v0 = DirectX::XMLoadFloat3(&inputCopy.m_Positions[inputCopy.m_Indices[i * 3 + 0]]);
+		DirectX::CXMVECTOR v1 = DirectX::XMLoadFloat3(&inputCopy.m_Positions[inputCopy.m_Indices[i * 3 + 1]]);
+		DirectX::CXMVECTOR v2 = DirectX::XMLoadFloat3(&inputCopy.m_Positions[inputCopy.m_Indices[i * 3 + 2]]);
 
-	//	//
-	//	// Generate the midpoints.
-	//	//
 
-	//	MeshData::Vertex m0, m1, m2;
+		
+		//
+		// Generate the midpoints.
+		//
 
-	//	// For subdivision, we just care about the position component.  We derive the other
-	//	// vertex components in CreateGeosphere.
+		DirectX::XMFLOAT3 m0;
+		DirectX::XMFLOAT3 m1;
+		DirectX::XMFLOAT3 m2;
 
-	//	m0.Position = DirectX::XMFLOAT3(
-	//		0.5f*(v0.Position.x + v1.Position.x),
-	//		0.5f*(v0.Position.y + v1.Position.y),
-	//		0.5f*(v0.Position.z + v1.Position.z));
+		// For subdivision, we just care about the position component.  We derive the other
+		// vertex components in CreateGeosphere.
 
-	//	m1.Position = DirectX::XMFLOAT3(
-	//		0.5f*(v1.Position.x + v2.Position.x),
-	//		0.5f*(v1.Position.y + v2.Position.y),
-	//		0.5f*(v1.Position.z + v2.Position.z));
+		
+		
+		m0 = DirectX::XMFLOAT3(
+			0.5f*(DirectX::XMVectorGetX(v0) + DirectX::XMVectorGetX(v1)),
+			0.5f*(DirectX::XMVectorGetY(v0) + DirectX::XMVectorGetY(v1)),
+			0.5f*(DirectX::XMVectorGetZ(v0) + DirectX::XMVectorGetZ(v1)));
+		
+		m1 = DirectX::XMFLOAT3(
+			0.5f*(DirectX::XMVectorGetX(v1) + DirectX::XMVectorGetX(v2)),
+			0.5f*(DirectX::XMVectorGetY(v1) + DirectX::XMVectorGetY(v2)),
+			0.5f*(DirectX::XMVectorGetZ(v1) + DirectX::XMVectorGetZ(v2)));
 
-	//	m2.Position = DirectX::XMFLOAT3(
-	//		0.5f*(v0.Position.x + v2.Position.x),
-	//		0.5f*(v0.Position.y + v2.Position.y),
-	//		0.5f*(v0.Position.z + v2.Position.z));
+		m2 = DirectX::XMFLOAT3(
+			0.5f*(DirectX::XMVectorGetX(v0) + DirectX::XMVectorGetX(v2)),
+			0.5f*(DirectX::XMVectorGetY(v0) + DirectX::XMVectorGetY(v2)),
+			0.5f*(DirectX::XMVectorGetZ(v0) + DirectX::XMVectorGetZ(v2)));
 
-	//	//
-	//	// Add new geometry.
-	//	//
 
-	//	meshData.m_Vertices.push_back(v0); // 0
-	//	meshData.m_Vertices.push_back(v1); // 1
-	//	meshData.m_Vertices.push_back(v2); // 2
-	//	meshData.m_Vertices.push_back(m0); // 3
-	//	meshData.m_Vertices.push_back(m1); // 4
-	//	meshData.m_Vertices.push_back(m2); // 5
- //
-	//	meshData.m_Indices.push_back(i*6+0);
-	//	meshData.m_Indices.push_back(i*6+3);
-	//	meshData.m_Indices.push_back(i*6+5);
+		//
+		// Add new geometry.
+		//
 
-	//	meshData.m_Indices.push_back(i*6+3);
-	//	meshData.m_Indices.push_back(i*6+4);
-	//	meshData.m_Indices.push_back(i*6+5);
+		meshData.m_Positions.push_back(back_v0); // 0
+		meshData.m_Positions.push_back(back_v1); // 1
+		meshData.m_Positions.push_back(back_v2); // 2
+		meshData.m_Positions.push_back(m0); // 3
+		meshData.m_Positions.push_back(m1); // 4
+		meshData.m_Positions.push_back(m2); // 5
+ 
+		meshData.m_Indices.push_back(i*6+0);
+		meshData.m_Indices.push_back(i*6+3);
+		meshData.m_Indices.push_back(i*6+5);
 
-	//	meshData.m_Indices.push_back(i*6+5);
-	//	meshData.m_Indices.push_back(i*6+4);
-	//	meshData.m_Indices.push_back(i*6+2);
+		meshData.m_Indices.push_back(i*6+3);
+		meshData.m_Indices.push_back(i*6+4);
+		meshData.m_Indices.push_back(i*6+5);
 
-	//	meshData.m_Indices.push_back(i*6+3);
-	//	meshData.m_Indices.push_back(i*6+1);
-	//	meshData.m_Indices.push_back(i*6+4);
-	//}
+		meshData.m_Indices.push_back(i*6+5);
+		meshData.m_Indices.push_back(i*6+4);
+		meshData.m_Indices.push_back(i*6+2);
+
+		meshData.m_Indices.push_back(i*6+3);
+		meshData.m_Indices.push_back(i*6+1);
+		meshData.m_Indices.push_back(i*6+4);
+	}
 }
 
 void GeometryGenerator::ComputeNormals(MeshData& meshData) const
@@ -551,7 +563,7 @@ void GeometryGenerator::BuildStacks(MeshData& meshData, float bottomRadius, floa
 void GeometryGenerator::CreateGeosphere(MeshData& meshData, float radius, UINT numSubdivisions) const
 {
 	// Put a cap on the number of subdivisions.
-	//numSubdivisions = MathHelper::Min(numSubdivisions, 5u);
+	numSubdivisions = min(numSubdivisions, 5u);
 
 	// Approximate a sphere by tessellating an icosahedron.
 
@@ -580,9 +592,6 @@ void GeometryGenerator::CreateGeosphere(MeshData& meshData, float radius, UINT n
 	};
 
 	meshData.m_Positions.resize(12);
-	meshData.m_Normals.resize(12);
-	meshData.m_TexCoords.resize(12);
-	meshData.m_Tangents.resize(12);
 	meshData.m_Indices.resize(60);
 
 	for (UINT i = 0; i < 12; ++i)
@@ -591,11 +600,15 @@ void GeometryGenerator::CreateGeosphere(MeshData& meshData, float radius, UINT n
 	for(UINT i = 0; i < 60; ++i)
 		meshData.m_Indices[i] = k[i];
 
-	for(UINT i = 0; i < numSubdivisions; ++i)
+	for (UINT i = 0; i < numSubdivisions; ++i)
 		Subdivide(meshData);
 
+	UINT size = meshData.m_Positions.size();
+	meshData.m_Normals.resize(size);
+	meshData.m_TexCoords.resize(size);
+	meshData.m_Tangents.resize(size);
 	// Project vertices onto sphere and scale.
-	for (UINT i = 0; i < meshData.m_Positions.size(); ++i)
+	for (UINT i = 0; i < size; ++i)
 	{
 		// Project onto unit sphere.
 		DirectX::XMVECTOR n = DirectX::XMVector3Normalize(DirectX::XMLoadFloat3(&meshData.m_Positions[i]));
@@ -612,8 +625,8 @@ void GeometryGenerator::CreateGeosphere(MeshData& meshData, float radius, UINT n
 
 		float phi = acosf(meshData.m_Positions[i].y / radius);
 
-		meshData.m_TexCoords[i].x = theta / DirectX::XM_2PI;
-		meshData.m_TexCoords[i].y = phi / DirectX::XM_PI;
+		meshData.m_TexCoords[i].x =  theta / DirectX::XM_2PI;
+		meshData.m_TexCoords[i].y =  phi / DirectX::XM_PI;
 
 		// Partial derivative of P with respect to theta
 		meshData.m_Tangents[i].x = -radius*sinf(phi)*sinf(theta);
@@ -1029,7 +1042,7 @@ void GeometryGenerator::CreateFromHightMap(MeshData& meshData, const Highmap* hi
 	}
 }
 
-void GeometryGenerator::CreateBillboard(MeshData& meshData) const
+void GeometryGenerator::CreatePointWithSize(MeshData& meshData) const
 {
 	meshData.m_Positions.push_back(DirectX::XMFLOAT3(-0.0f, -0.0f, 0.0f));
 	meshData.m_Sizes.push_back(DirectX::XMFLOAT2(1.f, 1.f));
@@ -1050,6 +1063,7 @@ void GeometryGenerator::CreateCircle(MeshData& meshData, float radius, float sub
 		float z = radius * cosf(angle);
 
 		meshData.m_Positions.push_back(DirectX::XMFLOAT3(x, y, z));
+		meshData.m_Normals.push_back(DirectX::XMFLOAT3(x, y, z));
 		meshData.m_Indices.push_back(i);
 	}
 

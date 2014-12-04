@@ -4,6 +4,8 @@
 
 BillboardMaterial::BillboardMaterial()
 {
+	m_VertexType	 = VertexType::POS_SIZE;
+	m_TopologyType	= TopologyType::POINT_LIST;
 }
 
 

@@ -39,6 +39,9 @@ public:
 	RenderState					m_RenderState;
 	EffectType					m_EffectType;
 
+	TopologyType				m_TopologyType;
+	VertexType					m_VertexType;
+
 	std::shared_ptr<ITexture>   m_DiffuseMap;
 	std::shared_ptr<Effect>		m_Effect;
 
