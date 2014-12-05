@@ -37,6 +37,8 @@ public:
 
 	std::shared_ptr<Material> Cylinder;
 	std::shared_ptr<Material> Sphere;
+
+	std::shared_ptr<Material> Subdivision;
 	//MaterialVec	m_Material;
 };
 
