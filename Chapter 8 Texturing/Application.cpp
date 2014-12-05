@@ -411,9 +411,9 @@ void Application::CreateObject(UINT id)
 		circle->SetMaterial(ContentManager::GetInstance().m_MaterialManager->Cylinder);
 		m_ModelObjects.push_back(circle);*/
 
-		Triangle* point = new Triangle();
-		point->SetMaterial(ContentManager::GetInstance().m_MaterialManager->Sphere);
-		m_ModelObjects.push_back(point);
+		Triangle* triangle = new Triangle();
+		triangle->SetMaterial(ContentManager::GetInstance().m_MaterialManager->Subdivision);
+		m_ModelObjects.push_back(triangle);
 
 		/*ModelObject* traingle = new Triangle();
 		traingle->SetMaterial(ContentManager::GetInstance().m_MaterialManager->WoodenBox);

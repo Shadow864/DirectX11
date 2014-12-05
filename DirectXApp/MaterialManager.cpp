@@ -7,6 +7,7 @@
 #include "BillboardMaterial.h"
 #include "CylinderMaterial.h"
 #include "SphereMaterial.h"
+#include "SubdivisionMaterial.h"
 
 MaterialManager::MaterialManager()
 {
@@ -124,6 +125,10 @@ MaterialManager::MaterialManager()
 	Sphere = std::make_shared<SphereMaterial>();
 	Sphere->m_EffectType = EffectType::SPHERE;
 	Sphere->m_DiffuseMap = fire_texture;
+
+	Subdivision = std::make_shared<SubdivisionMaterial>();
+	Subdivision->m_EffectType = EffectType::SUBDIVISION;
+	Subdivision->m_DiffuseMap = fire_texture;
 	
 }
 
