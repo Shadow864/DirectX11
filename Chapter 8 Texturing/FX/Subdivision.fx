@@ -1,6 +1,5 @@
 #include "LightHelper.fx"
 
-
 // Returns the polar angle of the point (x,y) in [0, 2*PI).
 float AngleFromXY(float x, float y)
 {
@@ -23,7 +22,6 @@ float AngleFromXY(float x, float y)
 
 	return theta;
 }
-
 cbuffer cbPerFrame
 {
 	DirectionalLight gDirLight;
@@ -112,26 +110,133 @@ VertexOut VS(VertexIn vin)
     return vout;
 }
 
-
-// We expand each point into a quad (4 vertices), so the maximum number of vertices
-// we output per geometry shader invocation is 4.
-[maxvertexcount(60)]
-void GS(triangle VertexOut gin[3], uint primID : SV_PrimitiveID, inout TriangleStream<GeoOut> triStream)
+void Subdivide(VertexOut inVerts[3], out VertexOut outVerts[6])
 {
-	GeoOut gout;
-	[unroll]
-	for (int i = 0; i < 3; ++i)
-	{
-		gout.PosW		= gin[i].PosW;
-		gout.PosH		= mul(float4(gout.PosW, 1.0f), gViewProj);
-		gout.NormalW = gin[i].NormalW;
-		gout.Tex		= gin[i].Tex;
-		gout.PrimID		= primID;
+	outVerts[0].PosW	= inVerts[0].PosW;
+	outVerts[0].NormalW = inVerts[0].NormalW;
+	outVerts[0].Tex		= inVerts[0].Tex;
 
-		triStream.Append(gout);
+	outVerts[1].PosW	= 0.5f * (inVerts[0].PosW + inVerts[1].PosW);
+	outVerts[1].NormalW = 0.5f * (inVerts[0].NormalW + inVerts[1].NormalW);
+	outVerts[1].Tex		= 0.5f * (inVerts[0].Tex + inVerts[1].Tex);
+
+	outVerts[2].PosW	= 0.5f * (inVerts[0].PosW + inVerts[2].PosW);
+	outVerts[2].NormalW = 0.5f * (inVerts[0].NormalW + inVerts[2].NormalW);
+	outVerts[2].Tex		= 0.5f * (inVerts[0].Tex + inVerts[2].Tex);
+
+	outVerts[3].PosW	= 0.5f * (inVerts[1].PosW + inVerts[2].PosW);
+	outVerts[3].NormalW = 0.5f * (inVerts[1].NormalW + inVerts[2].NormalW);
+	outVerts[3].Tex		= 0.5f * (inVerts[1].Tex + inVerts[2].Tex);
+
+	outVerts[4].PosW	= inVerts[2].PosW;
+	outVerts[4].NormalW = inVerts[2].NormalW;
+	outVerts[4].Tex		= inVerts[2].Tex;
+
+	outVerts[5].PosW	= inVerts[1].PosW;
+	outVerts[5].NormalW = inVerts[1].NormalW;
+	outVerts[5].Tex		= inVerts[1].Tex;
+
+}
+
+void SubdivideOutput(VertexOut inVerts[6], inout TriangleStream<GeoOut> triStream)
+{
+	GeoOut gout[6];
+	[unroll]
+	for (int i = 0; i < 6; ++i)
+	{
+		gout[i].PosW = (inVerts[i].PosW);
+		gout[i].PosH = mul(float4(gout[i].PosW, 1.0f), gViewProj);
+		gout[i].NormalW = inVerts[i].NormalW;
+		gout[i].Tex = inVerts[i].Tex;
+		gout[i].PrimID = i;
 	}
 
+	[unroll]
+	for (int j = 0; j < 5; ++j)
+	{
+		triStream.Append(gout[j]);
+	}
 
+	triStream.RestartStrip();
+
+	triStream.Append(gout[1]);
+	triStream.Append(gout[5]);
+	triStream.Append(gout[3]);
+}
+
+void Subdivide(VertexOut gin[3], int level, inout TriangleStream<GeoOut> triStream)
+{
+	
+	if (level == 0)
+	{
+		GeoOut gout[3];
+		[unroll]
+		for (int i = 0; i < 3; ++i)
+		{
+			gout[i].PosW = gin[i].PosW;
+			gout[i].PosH = mul(float4(gout[i].PosW, 1.0f), gViewProj);
+			gout[i].NormalW = gin[i].NormalW;
+			gout[i].Tex = gin[i].Tex;
+			gout[i].PrimID = i;
+
+			triStream.Append(gout[i]);
+		}
+
+		triStream.RestartStrip();
+	}
+	else if (level == 1)
+	{
+		VertexOut v[6];
+		Subdivide(gin, v);
+		SubdivideOutput(v, triStream);
+		triStream.RestartStrip();
+	}
+	else
+	{
+		VertexOut v[6];
+		Subdivide(gin, v);
+
+		VertexOut tri0[3] = { v[0], v[1], v[2] };
+		VertexOut tri1[3] = { v[1], v[3], v[2] };
+		VertexOut tri2[3] = { v[2], v[3], v[4] };
+		VertexOut tri3[3] = { v[1], v[5], v[3] };
+
+
+		Subdivide(tri0, v);
+		SubdivideOutput(v, triStream);
+		triStream.RestartStrip();
+
+		Subdivide(tri1, v);
+		SubdivideOutput(v, triStream);
+		triStream.RestartStrip();
+
+		Subdivide(tri2, v);
+		SubdivideOutput(v, triStream);
+		triStream.RestartStrip();
+
+		Subdivide(tri3, v);
+		SubdivideOutput(v, triStream);
+		triStream.RestartStrip();
+	}
+}
+
+[maxvertexcount(64)]
+void GS(triangle VertexOut gin[3], uint primID : SV_PrimitiveID, inout TriangleStream<GeoOut> triStream)
+{
+
+	float d = distance(gEyePosW, float3(0,0,0));
+
+	uint level = 0;
+
+	if (d < 15)
+		level = 2;
+	else if (d < 30)
+		level = 1;
+	else
+		level = 0;
+
+	Subdivide(gin, level, triStream);
+		
 	triStream.RestartStrip();
 }
 
@@ -157,7 +262,7 @@ float4 PS(GeoOut pin, uniform bool gUseTexture, uniform bool gFogEnabled) : SV_T
 	}
 
 	// Start with a sum of zero.
-	float4 ambient = float4(0.0f, 0.0f, 0.0f, 0.0f);
+	float4 ambient = float4(0.2f, 0.2f, 0.2f, 0.0f);
 	float4 diffuse = float4(0.0f, 0.0f, 0.0f, 0.0f);
 	float4 spec = float4(0.0f, 0.0f, 0.0f, 0.0f);
 	
@@ -165,7 +270,7 @@ float4 PS(GeoOut pin, uniform bool gUseTexture, uniform bool gFogEnabled) : SV_T
 	float4 A, D, S;
 	ComputeDirectionalLight(gDiffuse, gSpecular, gAmbient, gDirLight, pin.NormalW, toEye, A, D, S);
 	
-	ambient += A;
+	ambient += A ;
 	diffuse += D;
 	spec += S;
 
