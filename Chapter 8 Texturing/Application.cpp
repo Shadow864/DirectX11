@@ -407,11 +407,11 @@ void Application::CreateObject(UINT id)
 
 	else if (id == 2)
 	{
-		/*Circle* circle = new Circle();
-		circle->SetMaterial(ContentManager::GetInstance().m_MaterialManager->Cylinder);
-		m_ModelObjects.push_back(circle);*/
+		//*Circle* circle = new Circle();
+		//circle->SetMaterial(ContentManager::GetInstance().m_MaterialManager->Cylinder);
+		//m_ModelObjects.push_back(circle);*/
 
-		Triangle* triangle = new Triangle();
+		ModelObject* triangle = new Triangle();
 		triangle->SetMaterial(ContentManager::GetInstance().m_MaterialManager->Subdivision);
 		m_ModelObjects.push_back(triangle);
 
@@ -419,8 +419,14 @@ void Application::CreateObject(UINT id)
 		traingle->SetMaterial(ContentManager::GetInstance().m_MaterialManager->WoodenBox);
 		m_ModelObjects.push_back(traingle);*/
 	}
-	else if ( id == 3)
-		m_ModelObjects.push_back(new SierpinskiTriangle(2));
+	else if (id == 3)
+	{
+		ModelObject* triangle = new Geosphere(1, 2);
+		triangle->SetMaterial(ContentManager::GetInstance().m_MaterialManager->Fire);
+		m_ModelObjects.push_back(triangle);
+
+		//m_ModelObjects.push_back(new SierpinskiTriangle(2));
+	}
 	else if ( id == 4)
 		m_ModelObjects.push_back(new SierpinskiPyramid(1));
 	else if ( id == 5)
