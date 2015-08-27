@@ -22,6 +22,9 @@
     <FxCompile Include="FX\Subdivision.fx">
       <Filter>Resource Files\FX</Filter>
     </FxCompile>
+    <FxCompile Include="FX\Explosion.fx">
+      <Filter>Resource Files\FX</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />

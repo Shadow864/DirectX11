@@ -39,6 +39,7 @@ public:
 	std::shared_ptr<Material> Sphere;
 
 	std::shared_ptr<Material> Subdivision;
+	std::shared_ptr<Material> Explosion;
 	//MaterialVec	m_Material;
 };
 

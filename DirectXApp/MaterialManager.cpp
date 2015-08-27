@@ -8,6 +8,7 @@
 #include "CylinderMaterial.h"
 #include "SphereMaterial.h"
 #include "SubdivisionMaterial.h"
+#include "ExplosionMaterial.h"
 
 MaterialManager::MaterialManager()
 {
@@ -129,6 +130,10 @@ MaterialManager::MaterialManager()
 	Subdivision = std::make_shared<SubdivisionMaterial>();
 	Subdivision->m_EffectType = EffectType::SUBDIVISION;
 	Subdivision->m_DiffuseMap = fire_texture;
+
+	Explosion = std::make_shared<ExplosionMaterial>();
+	Explosion->m_EffectType = EffectType::EXPLOSION;
+	Explosion->m_DiffuseMap = fire_texture;
 	
 }
 

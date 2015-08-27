@@ -206,6 +206,7 @@ void Application::Render(
 	effect->SetFogStart(40.f);
 	effect->SetFogRange(60.f);
 
+	effect->SetTime(GetTime());
 
 	effect->SetDirLights(&m_Light);
 	effect->SetEyePosW(m_EyePos);
@@ -411,8 +412,8 @@ void Application::CreateObject(UINT id)
 		//circle->SetMaterial(ContentManager::GetInstance().m_MaterialManager->Cylinder);
 		//m_ModelObjects.push_back(circle);*/
 
-		ModelObject* triangle = new Triangle();
-		triangle->SetMaterial(ContentManager::GetInstance().m_MaterialManager->Subdivision);
+		ModelObject* triangle = new Geosphere(1, 2);
+		triangle->SetMaterial(ContentManager::GetInstance().m_MaterialManager->Fire);
 		m_ModelObjects.push_back(triangle);
 
 		/*ModelObject* traingle = new Triangle();
@@ -422,7 +423,7 @@ void Application::CreateObject(UINT id)
 	else if (id == 3)
 	{
 		ModelObject* triangle = new Geosphere(1, 2);
-		triangle->SetMaterial(ContentManager::GetInstance().m_MaterialManager->Fire);
+		triangle->SetMaterial(ContentManager::GetInstance().m_MaterialManager->Explosion);
 		m_ModelObjects.push_back(triangle);
 
 		//m_ModelObjects.push_back(new SierpinskiTriangle(2));

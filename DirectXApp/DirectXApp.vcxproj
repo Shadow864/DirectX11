@@ -157,6 +157,7 @@
     <ClInclude Include="DirectXApp.h" />
     <ClInclude Include="Effects\Effect.h" />
     <ClInclude Include="Effects\EffectsManager.h" />
+    <ClInclude Include="ExplosionMaterial.h" />
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="GeometryGenerator.h" />
     <ClInclude Include="GraphicsCommon.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="DirectXApp.cpp" />
     <ClCompile Include="Effects\Effect.cpp" />
     <ClCompile Include="Effects\EffectsManager.cpp" />
+    <ClCompile Include="ExplosionMaterial.cpp" />
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="GeometryGenerator.cpp" />
     <ClCompile Include="GraphicsDevice.cpp" />

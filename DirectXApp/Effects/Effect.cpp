@@ -73,6 +73,7 @@ BaseEffect::BaseEffect(ID3D11Device* device, const std::wstring& filename)
  , m_FogColor(nullptr)
  , m_FogStart(nullptr)
  , m_FogRange(nullptr)
+ , m_Time(nullptr)
  , m_DiffuseTexture(nullptr)
 {
 	m_TechLight = m_Effect->GetTechniqueByName("Light");
@@ -92,6 +93,8 @@ BaseEffect::BaseEffect(ID3D11Device* device, const std::wstring& filename)
 	m_FogColor = m_Effect->GetVariableByName("gFogColor")->AsVector();
 	m_FogStart = m_Effect->GetVariableByName("gFogStart")->AsScalar();
 	m_FogRange = m_Effect->GetVariableByName("gFogRange")->AsScalar();
+
+	m_Time	= m_Effect->GetVariableByName("gTime")->AsScalar();
 
 	m_DiffuseTexture = m_Effect->GetVariableByName("gDiffuseMap")->AsShaderResource();
 
@@ -169,6 +172,12 @@ BaseEffect::~BaseEffect()
 	{
 		m_FogStart->Release();
 		m_FogStart = nullptr;
+	}
+
+	if (m_Time)
+	{
+		m_Time->Release();
+		m_Time = nullptr;
 	}
 
 	if (m_TechLight)

@@ -38,6 +38,8 @@ public:
 	virtual void SetFogStart(float /*start*/) {}
 	virtual void SetFogRange(float /*range*/) {}
 
+	virtual void SetTime(float /*range*/) {}
+
 	virtual void Apply(std::shared_ptr<Material> material) = 0;
 
 	virtual ID3DX11EffectTechnique* GetTechnique(const std::string& name) = 0;
@@ -76,7 +78,7 @@ public:
 	void SetFogStart(float start)								override { m_FogStart->SetFloat(start); }
 	void SetFogRange(float range)								override { m_FogRange->SetFloat(range); }
 
-
+	void SetTime(float time)									override { m_Time->SetFloat(time);  }
 	void Apply(std::shared_ptr<Material> material)				override;
 
 	virtual ID3DX11EffectTechnique* GetTechnique(const std::string& name) override;
@@ -103,6 +105,8 @@ protected:
 	ID3DX11EffectVectorVariable*			m_FogColor;
 	ID3DX11EffectScalarVariable*			m_FogStart;
 	ID3DX11EffectScalarVariable*			m_FogRange;
+
+	ID3DX11EffectScalarVariable*			m_Time;
 
 	ID3DX11EffectVariable*					m_DirLight;
 	ID3DX11EffectShaderResourceVariable*	m_DiffuseTexture;

@@ -56,6 +56,7 @@ enum class EffectType
 	CYLINDER,
 	SPHERE,
 	SUBDIVISION,
+	EXPLOSION,
 	COUNT
 };
 
