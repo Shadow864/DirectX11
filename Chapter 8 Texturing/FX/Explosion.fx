@@ -101,13 +101,13 @@ void GS(triangle VertexOut gin[3], uint primID : SV_PrimitiveID, inout TriangleS
 		float3 normal = normalize(cross(v1, v2));
 
 
-	float time = (gTime * 1.2f) % 2.0;
+	float time = (gTime * 1.2f) % 3.0;
 
 
 	float speed = 0;
 	if (time - 1.0 > 0)
 	{
-		speed = ((time - 1.0) / 1.0f) * 7.0;
+		speed = ((time - 1.0) / 1.0f) * (((float)primID % 7) + 3);
 	}
 
 	GeoOut gout[3];
