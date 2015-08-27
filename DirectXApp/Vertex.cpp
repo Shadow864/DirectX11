@@ -105,5 +105,6 @@ D3D_PRIMITIVE_TOPOLOGY InputLayoutsManager::GetTopology(TopologyType type) const
 	case TopologyType::TRIANGLE_LIST:
 		return D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 	}
+	return D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 }
 #pragma endregion

@@ -7,7 +7,7 @@ float AngleFromXY(float x, float y)
 	float theta = 0.0f;
 
 	// Quadrant I or IV
-	if (x >= 0.0f)
+	if (x > 0.0f)
 	{
 		// If x = 0, then atanf(y/x) = +pi/2 if y > 0
 		//                atanf(y/x) = -pi/2 if y < 0
