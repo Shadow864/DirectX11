@@ -214,34 +214,76 @@ void Application::Render(
 
 	m_GraphicsDevice->m_Context->IASetVertexBuffers(0, 1, &vertex_buffer, &stride, &offset);
 	m_GraphicsDevice->m_Context->IASetIndexBuffer(indices_buffer, DXGI_FORMAT_R32_UINT, 0);
-
-	// Set constants
-	ID3DX11EffectTechnique* technique = material->GetTechnique();
-
-
-	m_GraphicsDevice->RenderState->Apply(material->m_RenderState, Scope::MATERIAL);
-	D3DX11_TECHNIQUE_DESC techDesc;
-	technique->GetDesc(&techDesc);
+	
+	
+	ID3DX11EffectTechnique* technique = nullptr;
+{
+		// Set constants
+		technique = material->GetTechnique();
 
 
-	for (UINT p = 0; p < techDesc.Passes; ++p)
-	{
-		DirectX::XMMATRIX worldInvTranspose = MathHelper::InverseTranspose(world);
+		m_GraphicsDevice->RenderState->Apply(material->m_RenderState, Scope::MATERIAL);
+		D3DX11_TECHNIQUE_DESC techDesc;
+		technique->GetDesc(&techDesc);
 
 
-		effect->SetWorld(world);
-		effect->SetViewProj(m_GraphicsDevice->m_ViewProj);
-		effect->SetWorldInvTranspose(worldInvTranspose);
-		effect->SetWorldViewProj(world* m_GraphicsDevice->m_ViewProj);
+		for (UINT p = 0; p < techDesc.Passes; ++p)
+		{
+			DirectX::XMMATRIX worldInvTranspose = MathHelper::InverseTranspose(world);
 
 
-		effect->Apply(material);
+			effect->SetWorld(world);
+			effect->SetViewProj(m_GraphicsDevice->m_ViewProj);
+			effect->SetWorldInvTranspose(worldInvTranspose);
+			effect->SetWorldViewProj(world* m_GraphicsDevice->m_ViewProj);
 
-		technique->GetPassByIndex(p)->Apply(0, m_GraphicsDevice->m_Context);
 
-		m_GraphicsDevice->m_Context->DrawIndexed(index_count, start_index_location, base_vertex_location);
+			effect->Apply(material);
+
+			technique->GetPassByIndex(p)->Apply(0, m_GraphicsDevice->m_Context);
+
+			m_GraphicsDevice->m_Context->DrawIndexed(index_count, start_index_location, base_vertex_location);
+		}
+
 	}
+	{
+		auto render_normal = m_GraphicsDevice->RenderState->GetRenderNormalMode();
+		if (render_normal == RenderNormal::NONE)
+			technique = nullptr;
+		else if (render_normal == RenderNormal::NORMAL)
+			technique = material->GetTechnique("Normal");
+		else 
+			technique = material->GetTechnique("NormalSmooth");
 
+		// Set constants
+		
+
+		if (technique && technique->IsValid())
+		{
+			m_GraphicsDevice->RenderState->Apply(material->m_RenderState, Scope::MATERIAL);
+			D3DX11_TECHNIQUE_DESC techDesc;
+			technique->GetDesc(&techDesc);
+
+
+			for (UINT p = 0; p < techDesc.Passes; ++p)
+			{
+				DirectX::XMMATRIX worldInvTranspose = MathHelper::InverseTranspose(world);
+
+
+				effect->SetWorld(world);
+				effect->SetViewProj(m_GraphicsDevice->m_ViewProj);
+				effect->SetWorldInvTranspose(worldInvTranspose);
+				effect->SetWorldViewProj(world* m_GraphicsDevice->m_ViewProj);
+
+
+				effect->Apply(material);
+
+				technique->GetPassByIndex(p)->Apply(0, m_GraphicsDevice->m_Context);
+
+				m_GraphicsDevice->m_Context->DrawIndexed(index_count, start_index_location, base_vertex_location);
+			}
+		}
+	}
 	m_GraphicsDevice->RenderState->Reset(Scope::MATERIAL);
 }
 void Application::RenderModelObject(const ModelObject* object, DirectX::CXMMATRIX matrix, std::shared_ptr<Material> material)
@@ -304,7 +346,7 @@ void Application::RenderShadow(const ModelObject* object, DirectX::CXMMATRIX mat
 
 	DirectX::XMMATRIX shadow= DirectX::XMMatrixShadow(DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0), DirectX::XMVectorSet(0, 1, 0, 0));// m_Light.Direction);
 
-	Render(object, matrix *  shadow* DirectX::XMMatrixTranslation(0, -0.999, 0), ContentManager::GetInstance().m_MaterialManager->Shadow);
+	Render(object, matrix * shadow* DirectX::XMMatrixTranslation(0, -0.999, 0), ContentManager::GetInstance().m_MaterialManager->Shadow);
 }
 
 void Application::OnMouseDown(WPARAM btnState, int x, int y)
@@ -379,9 +421,21 @@ void Application::OnKeyDown(WPARAM btnState)
 	case VK_F2:
 		m_GraphicsDevice->RenderState->SetFillMode(FillMode::WIREFRAME, Scope::GLOBAL);
 		break;
+	case VK_F3:
+		ToggleRenderNormalMode();
+		break;
 	}
 }
 
+void Application::ToggleRenderNormalMode()
+{
+	if (m_GraphicsDevice->RenderState->GetRenderNormalMode() == RenderNormal::NONE)
+		m_GraphicsDevice->RenderState->SetRenderNormalMode(RenderNormal::NORMAL);
+	else if (m_GraphicsDevice->RenderState->GetRenderNormalMode() == RenderNormal::NORMAL)
+		m_GraphicsDevice->RenderState->SetRenderNormalMode(RenderNormal::SMOOTH);
+	else
+		m_GraphicsDevice->RenderState->SetRenderNormalMode(RenderNormal::NONE);
+}
 void Application::CreateObject(UINT id)
 {
 	DestroyObjects();

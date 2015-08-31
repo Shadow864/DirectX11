@@ -1,9 +1,12 @@
 #pragma once
 #include <string>
 #include <memory>
+#include <vector>
+#include <utility>
 
 #include "../LightHelper.h"
 #include "../../Effects11/inc/d3dx11effect.h"
+
 
 struct ID3D11Device;
 struct ID3DX11Effect;
@@ -84,9 +87,6 @@ public:
 	virtual ID3DX11EffectTechnique* GetTechnique(const std::string& name) override;
 	virtual ID3DX11EffectTechnique* GetTechnique(int index)  override;
 
-public:
-	ID3DX11EffectTechnique*					m_TechLight;
-	ID3DX11EffectTechnique*					m_TechLightTexture;
 
 protected:
 	ID3DX11EffectMatrixVariable*			m_World;
@@ -110,5 +110,7 @@ protected:
 
 	ID3DX11EffectVariable*					m_DirLight;
 	ID3DX11EffectShaderResourceVariable*	m_DiffuseTexture;
+
+	std::vector<std::pair<std::string, ID3DX11EffectTechnique*>> m_Techniques;
 };
 

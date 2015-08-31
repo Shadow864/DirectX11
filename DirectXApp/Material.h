@@ -30,7 +30,7 @@ public:
 	virtual void CreateVertexBuffer(ID3D11Device* device, const MeshData* mesh, ID3D11Buffer** vertexBuffer) const = 0;
 	virtual UINT VertexSize() const = 0;
 
-	ID3DX11EffectTechnique* GetTechnique();
+	ID3DX11EffectTechnique* GetTechnique(const char* name= nullptr);
 
 	DirectX::XMFLOAT4 m_Ambient;
 	DirectX::XMFLOAT4 m_Diffuse;

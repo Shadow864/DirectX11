@@ -36,6 +36,8 @@ void RenderStatesManager::InitAll(GraphicsDevice* device)
 {
 	m_Device = device;
 
+	m_RenderNormalMode = RenderNormal::NONE;
+
 	D3D11_RASTERIZER_DESC desc;
 	ZeroMemory(&desc, sizeof(D3D11_RASTERIZER_DESC));
 	desc.FillMode = D3D11_FILL_WIREFRAME;

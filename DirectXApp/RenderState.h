@@ -82,6 +82,9 @@ public:
 
 	void SetDepthStencilMode(DepthStencilMode depth_stencil_mode, UINT depth_stencil_ref, Scope scope);
 	void SetDepthStencilMode();
+
+	void SetRenderNormalMode(RenderNormal type) { m_RenderNormalMode = type; }
+	RenderNormal GetRenderNormalMode() const { return m_RenderNormalMode; }
 private:
 	static ID3D11RasterizerState* SolidRS;
 	static ID3D11RasterizerState* WireframeRS;
@@ -105,10 +108,12 @@ private:
 	RenderValue<BlendMode>				m_BlendMode;
 	RenderValue<DepthStencilMode>		m_DepthStencilMode;
 	RenderValue<UINT>					m_DepthStencilRef;
-
+	
 	RasterizerStates		m_RasterizerStates;
 	BlendStates				m_BlendStates;
 	DepthStencilStates		m_DepthStencilStates;
+
+	RenderNormal			m_RenderNormalMode;
 
 	GraphicsDevice*			m_Device;
 

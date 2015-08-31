@@ -44,6 +44,7 @@ private:
 	void BuildGeometryBuffers();
 	void BuildVertexLayout();
 
+	void ToggleRenderNormalMode();
 
 	void Render(UINT stride, UINT offset, ID3D11Buffer* vertex_buffer, ID3D11Buffer* indices_buffer, std::shared_ptr<Material> material, UINT index_count, UINT start_index_location, INT base_vertex_location, DirectX::CXMMATRIX matrix);
 	void Render(const ModelObject* object, DirectX::CXMMATRIX, std::shared_ptr<Material> material = nullptr);

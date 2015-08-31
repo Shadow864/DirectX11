@@ -60,20 +60,20 @@ void InputLayoutsManager::Init(ID3D11Device* device, EffectsManager* effects)
 	//device->CreateInputLayout(InputLayoutDesc::PosNormal, 2, passDesc.pIAInputSignature,
 	//	passDesc.IAInputSignatureSize, &PosNormal);
 
-	effects->GetEffect(EffectType::BASIC)->m_TechLight->GetPassByIndex(0)->GetDesc(&passDesc);
+	effects->GetEffect(EffectType::BASIC)->GetTechnique(1)->GetPassByIndex(0)->GetDesc(&passDesc);
 	device->CreateInputLayout(InputLayoutDesc::PosNormalTexCoord, 3, passDesc.pIAInputSignature,
 		passDesc.IAInputSignatureSize, &m_InputLayouts[(int)VertexType::POS_NORMAL_TEXCOORD]);
 
-	effects->GetEffect(EffectType::SUBDIVISION)->m_TechLight->GetPassByIndex(0)->GetDesc(&passDesc);
+	effects->GetEffect(EffectType::SUBDIVISION)->GetTechnique(1)->GetPassByIndex(0)->GetDesc(&passDesc);
 	device->CreateInputLayout(InputLayoutDesc::PosNormalTexCoord, 3, passDesc.pIAInputSignature,
 		passDesc.IAInputSignatureSize, &m_InputLayouts[(int)VertexType::POS_NORMAL_TEXCOORD]);
 
 
-	effects->GetEffect(EffectType::BILLBOARD)->m_TechLight->GetPassByIndex(0)->GetDesc(&passDesc);
+	effects->GetEffect(EffectType::BILLBOARD)->GetTechnique(1)->GetPassByIndex(0)->GetDesc(&passDesc);
 	device->CreateInputLayout(InputLayoutDesc::PosSize, 2, passDesc.pIAInputSignature,
 		passDesc.IAInputSignatureSize, &m_InputLayouts[(int)VertexType::POS_SIZE]);
 
-	effects->GetEffect(EffectType::CYLINDER)->m_TechLight->GetPassByIndex(0)->GetDesc(&passDesc);
+	effects->GetEffect(EffectType::CYLINDER)->GetTechnique(1)->GetPassByIndex(0)->GetDesc(&passDesc);
 	device->CreateInputLayout(InputLayoutDesc::PosNormal, 2, passDesc.pIAInputSignature,
 		passDesc.IAInputSignatureSize, &m_InputLayouts[(int)VertexType::POS_NORMAL]);
 

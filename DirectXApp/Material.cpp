@@ -48,8 +48,11 @@ void Material::Update(float delta)
 		m_DiffuseMap->Update(delta);
 }
 
-ID3DX11EffectTechnique* Material::GetTechnique()
+ID3DX11EffectTechnique* Material::GetTechnique(const char* name)
 {
+	if (name)
+		return m_Effect->GetTechnique(name);
+
 	if (m_DiffuseMap)
 	{
 		return m_Effect->GetTechnique(1);

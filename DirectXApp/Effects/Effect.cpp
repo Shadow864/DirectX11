@@ -59,9 +59,6 @@ HRESULT Effect::CreateEffectFromMemory(ID3D11Device* device, const std::wstring&
 
 BaseEffect::BaseEffect(ID3D11Device* device, const std::wstring& filename)
  : Effect(device, filename)
- , m_TechLight(nullptr)
- , m_TechLightTexture(nullptr)
- , m_World(nullptr)
  , m_WorldInvTranspose(nullptr)
  , m_WorldViewProj(nullptr)
  , m_TexTransform(nullptr)
@@ -76,8 +73,12 @@ BaseEffect::BaseEffect(ID3D11Device* device, const std::wstring& filename)
  , m_Time(nullptr)
  , m_DiffuseTexture(nullptr)
 {
-	m_TechLight = m_Effect->GetTechniqueByName("Light");
-	m_TechLightTexture = m_Effect->GetTechniqueByName("LightTexture");
+
+	m_Techniques.push_back(std::make_pair("Light", m_Effect->GetTechniqueByName("Light")));
+	m_Techniques.push_back(std::make_pair("LightTexture", m_Effect->GetTechniqueByName("LightTexture")));
+	m_Techniques.push_back(std::make_pair("Normal", m_Effect->GetTechniqueByName("Normal")));
+	m_Techniques.push_back(std::make_pair("NormalSmooth", m_Effect->GetTechniqueByName("NormalSmooth")));
+
 	m_World = m_Effect->GetVariableByName("gWorld")->AsMatrix();
 	m_ViewProj = m_Effect->GetVariableByName("gViewProj")->AsMatrix();
 	m_WorldInvTranspose = m_Effect->GetVariableByName("gWorldInvTranspose")->AsMatrix();
@@ -180,17 +181,12 @@ BaseEffect::~BaseEffect()
 		m_Time = nullptr;
 	}
 
-	if (m_TechLight)
+	while (!m_Techniques.empty())
 	{
-		m_TechLight->Release();
-		m_TechLight = nullptr;
+		m_Techniques[m_Techniques.size() - 1].second->Release();
+		m_Techniques.pop_back();
 	}
-
-	if (m_TechLightTexture)
-	{
-		m_TechLightTexture->Release();
-		m_TechLightTexture = nullptr;
-	}
+	m_Techniques.clear();
 }
 
 void BaseEffect::Apply(std::shared_ptr<Material> material)
@@ -208,13 +204,16 @@ void BaseEffect::Apply(std::shared_ptr<Material> material)
 
 ID3DX11EffectTechnique* BaseEffect::GetTechnique(const std::string& name)
 {
-	return m_TechLightTexture;
+	for (auto var : m_Techniques)
+	{
+		if (var.first == name)
+			return var.second;
+	}
+
+	return nullptr;
 }
 
 ID3DX11EffectTechnique* BaseEffect::GetTechnique(int index)
 {
-	if (index == 0)
-		return m_TechLight;
-	else 
-		return m_TechLightTexture;
+	return m_Techniques[index].second;
 }

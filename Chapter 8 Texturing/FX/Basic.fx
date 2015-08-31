@@ -51,6 +51,12 @@ struct VertexOut
 	float2 Tex		: TEXCOORD;
 };
 
+struct GeoOut2
+{
+	float4 PosH    : SV_POSITION;
+	float3 PosW    : POSITION;
+};
+
 VertexOut VS(VertexIn vin)
 {
 	VertexOut vout;
@@ -68,6 +74,69 @@ VertexOut VS(VertexIn vin)
 
     return vout;
 }
+
+
+[maxvertexcount(6)]
+void GS_Normal(triangle VertexOut gin[3], uint primID : SV_PrimitiveID, inout LineStream<GeoOut2> lineStream, uniform bool gSmooth)
+{
+
+	float3 v1 = gin[0].PosW - gin[1].PosW;
+	float3 v2 = gin[1].PosW - gin[2].PosW;
+	float3 normal = normalize(cross(v1, v2));
+
+	float3 vt = normalize(gin[0].PosW - gEyePosW);
+
+	// Take the dot product of the normal with the view direction
+	float d = dot(vt, normal);
+
+	// Emit a primitive only if the sign of the dot product is positive
+	if (d > 0.0)
+		return;
+
+	if (gSmooth)
+	{
+		GeoOut2 gout[2];
+		float3 pos = float3(0, 0, 0);
+		for (int i = 0; i < 3; ++i)
+		{
+			pos += gin[i].PosW;
+		}
+		pos /= 3.0f;
+
+		gout[0].PosW = pos;
+		gout[0].PosH = mul(float4(gout[0].PosW, 1.0f), gViewProj);
+
+		gout[1].PosW = gout[0].PosW + normal;
+		gout[1].PosH = mul(float4(gout[1].PosW, 1.0f), gViewProj);
+
+		lineStream.Append(gout[0]);
+		lineStream.Append(gout[1]);
+
+		lineStream.RestartStrip();
+	}
+	else
+	{
+		GeoOut2 gout[6];
+		[unroll]
+		for (int i = 0; i < 3; ++i)
+		{
+			gout[i * 2].PosW = gin[i].PosW;
+			gout[i * 2].PosH = mul(float4(gout[i * 2].PosW, 1.0f), gViewProj);
+
+			gout[i * 2 + 1].PosW = gin[i].PosW + gin[i].NormalW;
+			gout[i * 2 + 1].PosH = mul(float4(gout[i * 2 + 1].PosW, 1.0f), gViewProj);
+
+
+			lineStream.Append(gout[i * 2]);
+			lineStream.Append(gout[i * 2 + 1]);
+			lineStream.RestartStrip();
+		}
+
+		lineStream.RestartStrip();
+	}
+
+}
+
 
 float4 PS(VertexOut pin, uniform bool gUseTexture, uniform bool gFogEnabled) : SV_Target
 {
@@ -134,6 +203,27 @@ float4 PS(VertexOut pin, uniform bool gUseTexture, uniform bool gFogEnabled) : S
 
 }
 
+
+float4 PS2(GeoOut2 pin, uniform bool gUseTexture, uniform bool gFogEnabled) : SV_Target
+{
+	float3 toEye = gEyePosW - pin.PosW;
+
+	float distToEye = length(toEye);
+
+	toEye /= distToEye;
+
+
+	float4 litColor = float4(1.0f, 1.0f, 1.0f, 0.0f);
+	if (gFogEnabled)
+	{
+		float s = saturate((distToEye - gFogStart) / gFogRange);
+
+		litColor = lerp(litColor, gFogColor, s);// (1 - s) * litColor + s * gFogColor;
+	}
+	return litColor;
+}
+
+
 technique11 Light
 {
     pass P0
@@ -153,6 +243,28 @@ technique11 LightTexture
 		SetVertexShader(CompileShader(vs_4_0, VS()));
 		SetGeometryShader(NULL);
 		SetPixelShader(CompileShader(ps_4_0, PS(true, true)));
+	}
+}
+
+technique11 Normal
+{
+	pass P1
+	{
+
+		SetVertexShader(CompileShader(vs_4_0, VS()));
+		SetGeometryShader(CompileShader(gs_4_0, GS_Normal(false)));
+		SetPixelShader(CompileShader(ps_4_0, PS2(true, true)));
+	}
+}
+
+technique11 NormalSmooth
+{
+	pass P1
+	{
+
+		SetVertexShader(CompileShader(vs_4_0, VS()));
+		SetGeometryShader(CompileShader(gs_4_0, GS_Normal(true)));
+		SetPixelShader(CompileShader(ps_4_0, PS2(true, true)));
 	}
 }
 

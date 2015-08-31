@@ -33,6 +33,13 @@ enum class  DepthStencilMode
 	REFLECTION_SHADOW
 };
 
+enum class RenderNormal
+{
+	NONE,
+	NORMAL,
+	SMOOTH,
+};
+
 enum class Technique
 {
 	NORMAL,
